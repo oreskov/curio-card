@@ -6,8 +6,8 @@ Colour rules change the colour of an item, and can make it animate, from a value
 
 ## How the rules work
 
-- A rule is built like a rule in the [filter](filter.md#rules-and-conditions): one or more conditions, and all of them must match
-- The rules are checked from the top, and **the first rule that matches wins**. Put the most important rule first
+- A rule is built like a rule in the [filter](filter.md#rules-and-conditions): one or more conditions, and all of them must match. A condition can look at [other entities](filter.md#testing-other-entities)
+- The rules are checked from the top, and **the first rule that matches wins**. Put the most important rule first. Each rule has **↑** and **↓** to move it up or down, for the card's rules and for an entity's own
 - If no rule matches, the item looks as the card's [Colours](appearance.md#colours) setting says
 - Rules for one entity (under **Entities → Customise per entity**) are checked before the rules of the card
 - In the editor, each rule is folded and shows a summary (the conditions and the colour). Click a rule to open it. A rule you add opens by itself, and a rule stays open while you edit it. With two or more rules there are **Fold all** and **Unfold all** buttons. The same goes for filter rules, group rules and own buttons
@@ -53,7 +53,7 @@ With *Whole item*, the border and background of the item animate, and the icon a
 | Alarm triggered | *State* is `triggered` | Red | Whole item | Blink, fast |
 | Warm room | *Attribute* `current_temperature` is greater than `24` | Orange | Indicator only | None |
 
-Put the strict rules first. A battery that is below 10 % could come before one that is below 20 %, with a different colour for each.
+Put the strict rules first. A battery that is below 10 % could come before one that is below 20 %, with a different colour for each. If the order turns out wrong, move a rule with **↑** and **↓**.
 
 ## In YAML
 

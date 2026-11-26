@@ -29,12 +29,12 @@ The editor is a list of sections. Open the one you need; the others stay closed.
 |---|---|
 | **Entities** | Which entities to show, in which order. Sections and dividers. Settings, colour rules and buttons for one entity. See [Entities](entities.md) |
 | **Filter** | Find entities with rules instead of (or as well as) picking them. See [Filter](filter.md) |
-| **Layout** | Chips, tiles, list or grid. Alignment, icon position, columns, item width, gap, title and the text shown when the card is empty |
+| **Layout** | Chips, tiles, list or grid. Alignment, icon and text position, columns, item width, gap, title and the text shown when the card is empty, each with size, colour, placement, style and optional animation |
 | **Grouping** | Split the items into groups with a heading |
 | **Appearance** | Shape, size, colours, icon, name, secondary information, and the look of the card itself (opacity, border, shadow, corners) |
 | **Colours and animation** | Rules that change colour or animate from a value |
 | **Interaction** | What happens when you tap, hold or double tap an item or its icon |
-| **Buttons** | Controls (sliders and buttons for the entity type) and your own buttons |
+| **Buttons** | Controls (sliders and buttons for the entity type), your own buttons, where the buttons sit and in what order |
 | **Status indicators** | A small marker that shows the status |
 | **Advanced** | Show only active, hide unavailable, hide the card when empty, maximum number of items, data source |
 | **Changed from default** | Everything you have changed, with a way to undo it |

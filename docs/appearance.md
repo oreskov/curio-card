@@ -35,6 +35,9 @@ An active light uses the colour it shines in. Other active entities use the acti
 | **Show icon** | Shows the icon on the item |
 | **Icon size** | Automatic (follows the size of the item), S, M, L or XL. Only when the icon is shown |
 | **Show name** | Shows the name on the item |
+| **Hide the device name** | Removes the device's name from the start of the name. "Asus XT8 External IP" becomes "External IP". Only shown when the name is shown |
+
+**Hide the device name** only removes the device's name when it stands first in the name, and only when something is left. A name that is the same as the device's is kept whole, and a name you have written yourself is not changed. It can be turned on for one entity, so it fits when only some of your entities carry the device name twice.
 
 You can give a single entity its own name and icon under [Entities](entities.md#name-and-icon).
 
@@ -58,7 +61,7 @@ The line under the name. The choices are grouped by type, and only the types in 
 
 Choose **None** for no secondary line.
 
-**Big value** (tiles and grid) shows the first piece of secondary information large and in the colour of the item, for example `18 %` instead of a small line of text.
+**Big value** (tiles and grid) shows the first piece of secondary information large and in the colour of the item, for example `18 %` instead of a small line of text. The card splits a number from its unit (`18` large and `%` small and faint) only when the text is a number followed by a real unit, such as `%`, `°C` or `kWh`. Other text, for example an IP address like `192.168.50.143`, a time or a date, is shown whole in the large size. To place it in the middle of the item, use [Text alignment](layouts.md#text-alignment). It can be turned on or off for a single entity under **Customise per entity**, so one item can differ from the rest of the card.
 
 ![Big value on tiles](images/appearance-big-value.webp)
 

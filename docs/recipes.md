@@ -2,6 +2,8 @@
 
 Ready-made cards to copy from. Each recipe has a picture, the YAML, and the steps to build it in the editor. You never need the YAML: the steps do the same thing. Change the entity names to your own.
 
+Several recipes use **Hide the card when empty**. Home Assistant keeps a place open for a hidden card, so a gap can remain on the dashboard (see [Troubleshooting](troubleshooting.md#the-card-is-empty)).
+
 **Finding entities**
 
 - [Lights that are on](#lights-that-are-on)
@@ -9,7 +11,9 @@ Ready-made cards to copy from. Each recipe has a picture, the YAML, and the step
 - [Open doors and windows](#open-doors-and-windows)
 - [A room without its lamps](#a-room-without-its-lamps)
 - [Your own entities, but only when the battery is low](#your-own-entities-but-only-when-the-battery-is-low)
+- [Only while the vacuum is cleaning](#only-while-the-vacuum-is-cleaning)
 - [Media players that are playing](#media-players-that-are-playing)
+- [A selector that only shows while a player is on](#a-selector-that-only-shows-while-a-player-is-on)
 
 **Layout, grouping and colour**
 
@@ -18,6 +22,7 @@ Ready-made cards to copy from. Each recipe has a picture, the YAML, and the step
 - [Grouped by state](#grouped-by-state)
 - [A keypad of scenes](#a-keypad-of-scenes)
 - [Big numbers](#big-numbers)
+- [IP addresses and other text values](#ip-addresses-and-other-text-values)
 - [Chips with notification bubbles](#chips-with-notification-bubbles)
 - [A different colour rule for one entity](#a-different-colour-rule-for-one-entity)
 - [Signal and power from the device's sensors](#signal-and-power-from-the-devices-sensors)
@@ -25,6 +30,7 @@ Ready-made cards to copy from. Each recipe has a picture, the YAML, and the step
 **Controls**
 
 - [Lights with brightness and a scene button](#lights-with-brightness-and-a-scene-button)
+- [Buttons in your own place and order](#buttons-in-your-own-place-and-order)
 - [Blinds and a fan](#blinds-and-a-fan)
 - [A lock, a number and a choice list](#a-lock-a-number-and-a-choice-list)
 - [Thermostats](#thermostats)
@@ -201,6 +207,40 @@ filter:
 3. **Appearance → Secondary information:** *State* (chips show none by default).
 4. **Advanced → Hide the card when empty:** on.
 
+### Only while the vacuum is cleaning
+
+![Tiles with a vacuum and the room it is in](images/recipe-vacuum-room.webp)
+
+You pick the vacuum and the sensor that tells which room it is in. One **Show only if** rule looks at the vacuum, so both are shown while it is not docked. When it is docked, the card hides itself.
+
+```yaml
+type: custom:curio-card
+layout: tiles
+columns: 2
+hide_when_empty: true
+secondary_info:
+  - state
+entities:
+  - vacuum.robot
+  - sensor.robot_current_room
+filter:
+  only_if:
+    - conditions:
+        - entity: vacuum.robot
+          field: state
+          operator: is_not
+          value: docked
+```
+
+**In the editor**
+
+1. **Entities:** pick the vacuum and the room sensor.
+2. **Filter → Add Show only if rule:** *Measure on* **Specific entities** with the vacuum, *State* **is not** `docked`.
+3. **Appearance → Secondary information:** *State*.
+4. **Advanced → Hide the card when empty:** on.
+
+If the vacuum should always be on the card and only the room should follow it, use two rules. The first has *Domain* **is** `sensor` as well as the *Measure on* condition. The second is *Domain* **is** `vacuum`.
+
 ### Media players that are playing
 
 ![Tiles with media players and playback buttons](images/recipe-media.webp)
@@ -241,6 +281,53 @@ filter:
 If a player should not have buttons at all (for example a Music Assistant player you control elsewhere), open it under **Customise per entity** and add the override **Hide all buttons**. This only works for players you pick by hand.
 
 ## Layout, grouping and colour
+
+### A selector that only shows while a player is on
+
+![A list with a player and a selector](images/recipe-player-select.webp)
+
+Show every media player that is playing or paused, and also an input select (here a sound scene), but only while at least one player is on. When nothing plays, the card hides itself.
+
+```yaml
+type: custom:curio-card
+layout: list
+hide_when_empty: true
+secondary_info:
+  - state
+filter:
+  include:
+    - conditions:
+        - field: domain
+          operator: is
+          value: media_player
+    - conditions:
+        - field: domain
+          operator: is
+          value: input_select
+  only_if:
+    - conditions:
+        - field: state
+          operator: in
+          value: playing, paused, buffering
+    - conditions:
+        - field: domain
+          operator: is
+          value: input_select
+        - entity: media_player.*
+          match: any
+          field: state
+          operator: in
+          value: playing, paused, buffering
+```
+
+**In the editor**
+
+1. **Filter → Add Include rule:** *Domain* **is** `media_player`. Add a second rule: *Domain* **is** `input_select`.
+2. **Filter → Add Show only if rule:** *State* **is one of** `playing, paused, buffering`.
+3. **Add another Show only if rule:** *Domain* **is** `input_select`, then **Add condition**: *Measure on* **Pattern** `media_player.*`, *How many must match* **At least one**, *State* **is one of** `playing, paused, buffering`.
+4. **Advanced → Hide the card when empty:** on.
+
+Rules are OR with each other, so the players are shown by the first Show only rule, and the selector only by the second. To show the selector only when *all* players are on, or only when *none* is, change *How many must match*.
 
 ### Rooms with headings
 
@@ -396,6 +483,35 @@ entities:
 2. **Appearance → Icon size:** L. **Big value:** on. **Secondary information:** *State*.
 3. **Entities:** pick the sensors.
 
+### IP addresses and other text values
+
+![Two tiles with IP addresses in large, centred text](images/recipe-ip-values.webp)
+
+A filter finds every sensor whose entity ID ends in `ip`. The value is shown large and the text is centred. A text value such as an IP address is shown whole, and only a number followed by a unit is split into a large number and a small unit.
+
+```yaml
+type: custom:curio-card
+layout: tiles
+columns: 2
+icon_position: top
+big_value: true
+text_align: center
+secondary_info:
+  - state
+filter:
+  include:
+    - conditions:
+        - field: entity_id
+          operator: is
+          value: sensor.*ip
+```
+
+**In the editor**
+
+1. **Layout → Layout:** Tiles, **Columns:** 2, **Icon position:** Top left, **Text alignment:** Centre.
+2. **Appearance → Big value:** on. **Secondary information:** *State*.
+3. **Filter → Add Include rule:** *Entity ID* **is** `sensor.*ip`.
+
 ### Chips with notification bubbles
 
 ![Small chips with a bubble on the icon](images/recipe-bubbles.webp)
@@ -517,6 +633,45 @@ entities:
 3. **Buttons → Add button:** Icon `mdi:sofa`, Tooltip *Cosy*. Under **Tap** choose *Perform action*, pick `scene.turn_on` and the scene as target.
 
 A light with no colour temperature support shows only the brightness slider.
+
+### Buttons in your own place and order
+
+![Tiles with the buttons below the text, the scene button first](images/recipe-button-order.webp)
+
+The row of buttons sits below the text, and your own scene button comes before the two sliders.
+
+```yaml
+type: custom:curio-card
+layout: tiles
+columns: 1
+controls:
+  - brightness
+  - kelvin
+buttons_position: below
+buttons_order:
+  - btn:0
+  - kelvin
+  - brightness
+buttons:
+  - icon: mdi:sofa
+    name: Cosy
+    tap_action:
+      action: perform-action
+      perform_action: scene.turn_on
+      target:
+        entity_id: scene.cosy
+entities:
+  - light.living_room
+  - light.kitchen
+```
+
+**In the editor**
+
+1. **Entities:** pick the lights. **Buttons → Controls:** *Light: brightness* and *Light: Kelvin*. **Add button** with the scene, as in the recipe above.
+2. **Buttons → Button placement:** Below the text.
+3. **Order of the buttons:** use **↑** and **↓** to put *Cosy* first, then *Kelvin*, then *Brightness*.
+
+The order is also available for one entity under **Customise per entity**. See [Controls and buttons](controls-and-buttons.md#where-the-buttons-sit-and-in-what-order).
 
 ### Blinds and a fan
 

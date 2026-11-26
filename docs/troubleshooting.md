@@ -18,13 +18,14 @@ Find the symptom, then read what usually causes it.
 | The filter does not do anything | The filter needs at least one complete **Include** rule. A rule with an empty value, or without a field, is ignored. The editor says *Add an Include rule to use the filter.* |
 | The card is empty, but you expected entities | Check **Show only if**, **Advanced → Show only active**, **Hide unavailable** and **Max number of items**. Any of them can remove entities |
 | The card is gone from the dashboard | **Advanced → Hide the card when empty** is on, and nothing matches. The editor preview still shows the card |
+| A gap is left where a hidden card was | Home Assistant keeps a place for every card on the dashboard, also when the card hides itself, and the card cannot change that. It shows most in the Sections view. The gap is Home Assistant's, not a setting of the card. If it bothers you, put the entities that come and go in the same card as the ones that stay, and use [grouping](grouping.md) or [sections](entities.md#sections-and-dividers) instead of several cards |
 
 ## The filter finds the wrong entities
 
 - **The state is text.** Compare with `on`, not `true`, and with `playing`, not `Playing`. Text is not case sensitive, but spelling matters. The state field shows the raw state, for example `on` and not "Turned on"
 - **A number comparison needs numbers.** *is less than* only matches when the state or attribute is a number. `unavailable` and `unknown` never match
 - **Area, Floor, Label and Device** match either the name or the ID. If an entity has no area of its own, the area of its device is used
-- **`*` is a wildcard** in *is*, *is not* and *is one of*. A name with a `*` in it is read as a pattern
+- **`*` is a wildcard** in *is*, *is not*, *is one of* and *is not one of*. A name with a `*` in it is read as a pattern
 - **To combine values of one field, use *is one of***. Two conditions in the same rule must both match, so *State is on* and *State is off* in one rule never match anything. Use two rules instead, or *is one of*
 - **The filter shows at most 100 results.** The card says so. Turn on **Filter → Show all filter results** to lift the limit
 
@@ -53,6 +54,7 @@ Find the symptom, then read what usually causes it.
 |---|---|
 | No buttons are shown | **Controls** is empty by default, so choose the ones you want. In **chips** only buttons that act at once are shown, and your own buttons are not shown |
 | A control I want is not in the list | The list only shows the types that are in the card. Turn on **Buttons → Show all types** |
+| The buttons are in the wrong place or the wrong order | **Buttons → Button placement** moves the whole row, and **Buttons → Order of the buttons** orders the buttons in it. On one entity, check its own **Order of the buttons** and its overrides, since they replace the card's |
 | A control is missing on one entity | An entity only shows the controls its type and device can do. A light with no colour support has no colour control |
 | A device's own button (for example a player's favorite button) is not shown | **Buttons → The device's own choices, numbers and buttons** must be on. The button must belong to the same device as the entity, and must not be marked as configuration or diagnostic in Home Assistant, or be a restart or update button. Only four of the device's own controls are shown per item; buttons come first unless you changed the order |
 | A device's own button lights up when pressed, but nothing happens (Home Assistant's log may say "This feature is not supported") | The card only sends the press (`button.press`); it cannot tell whether the action worked. Try the same button in Home Assistant under *Settings → Devices*. If it fails there too, the cause is the integration, not the card. The Music Assistant favorite button, for example, fails when the current track cannot be found as an item in the library (some streams and radio stations) |

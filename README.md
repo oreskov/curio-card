@@ -6,12 +6,12 @@ I made Curio Card for my own dashboards. It is a hobby project, so please tell m
 
 ![Curio Card with lights, batteries and a row of chips](https://raw.githubusercontent.com/oreskov/curio-card/main/docs/images/overview.webp)
 
-- **Dynamic lists with rules:** pick entities by hand, or let a filter find them by domain, name, state, attribute, area, label and more. Combine rules with AND and OR, exclude what you do not want, and show an entity only when a condition holds
-- **Four layouts:** chips, tiles, list and grid, with five sizes, four shapes and your choice of icon position
+- **Dynamic lists with rules:** pick entities by hand, or let a filter find them by domain, name, state, attribute, area, label and more. Combine rules with AND and OR, exclude what you do not want, and show an entity only when a condition holds, even a condition on other entities
+- **Four layouts:** chips, tiles, list and grid, with five sizes, four shapes, your choice of icon and text position and a title you can style
 - **Colour and animation rules:** change the colour of the whole item, the icon or the indicator from a value, for example a battery below 20 % turning red and pulsing
 - **Grouping:** group by area, device, device class, domain or state, or build your own groups with rules. Groups can be folded
 - **Sections and dividers** in a manual list, and settings that apply to one entity only
-- **Controls and your own buttons:** ready-made buttons, sliders and lists for lights, covers, media players and more, plus round buttons of your own that run any action
+- **Controls and your own buttons:** ready-made buttons, sliders and lists for lights, covers, media players and more, plus round buttons of your own that run any action. Choose where the buttons sit and in what order
 - **Status indicators:** dot, corner badge, ring, stripe, notification bubble or state text
 - **Secondary information:** state, battery, brightness, media title, temperatures, signal, power and more under the name
 - **Visual editor** in English and Danish, following the Home Assistant language. The card only stores what you change from the defaults
@@ -84,16 +84,16 @@ You can leave the YAML alone from here: everything below is set in the editor. M
 |---|---|
 | [Getting started](https://github.com/oreskov/curio-card/blob/main/docs/getting-started.md) | Your first card, how the editor is organised, "Changed from default" |
 | [Entities](https://github.com/oreskov/curio-card/blob/main/docs/entities.md) | Manual lists, sections and dividers, settings and buttons for one entity, the same entity twice |
-| [Filter](https://github.com/oreskov/curio-card/blob/main/docs/filter.md) | Finding entities with rules: Include, Exclude and Show only if, AND and OR, fields and comparisons |
-| [Layouts](https://github.com/oreskov/curio-card/blob/main/docs/layouts.md) | Tiles, chips, list and grid, columns, alignment and icon position |
+| [Filter](https://github.com/oreskov/curio-card/blob/main/docs/filter.md) | Finding entities with rules: Include, Exclude and Show only if, AND and OR, fields and comparisons, conditions on other entities |
+| [Layouts](https://github.com/oreskov/curio-card/blob/main/docs/layouts.md) | Tiles, chips, list and grid, columns, alignment, icon and text position and styling of the title |
 | [Appearance](https://github.com/oreskov/curio-card/blob/main/docs/appearance.md) | Shape, size, colours, secondary information and the card around the items |
 | [Grouping](https://github.com/oreskov/curio-card/blob/main/docs/grouping.md) | Groups by area, device, device class, domain or state, and your own groups |
 | [Colour rules](https://github.com/oreskov/curio-card/blob/main/docs/colour-rules.md) | Colour and animation from a value, per card or per entity |
-| [Controls and buttons](https://github.com/oreskov/curio-card/blob/main/docs/controls-and-buttons.md) | Ready-made controls and your own buttons |
+| [Controls and buttons](https://github.com/oreskov/curio-card/blob/main/docs/controls-and-buttons.md) | Ready-made controls and your own buttons, where they sit and in what order |
 | [Status indicators](https://github.com/oreskov/curio-card/blob/main/docs/status-indicators.md) | Dot, badge, ring, stripe, bubble and state text |
 | [Actions](https://github.com/oreskov/curio-card/blob/main/docs/actions.md) | Tap, hold and double tap, and what Toggle does |
 | [Settings reference](https://github.com/oreskov/curio-card/blob/main/docs/settings-reference.md) | Every setting with its YAML key and default |
-| [Recipes](https://github.com/oreskov/curio-card/blob/main/docs/recipes.md) | Twenty ready-made cards with the steps to build them in the editor |
+| [Recipes](https://github.com/oreskov/curio-card/blob/main/docs/recipes.md) | Twenty-four ready-made cards with the steps to build them in the editor |
 | [Troubleshooting](https://github.com/oreskov/curio-card/blob/main/docs/troubleshooting.md) | What to check when something does not look right |
 
 ## Known limitations
@@ -102,6 +102,7 @@ You can leave the YAML alone from here: everything below is set in the editor. M
 - I have not tried the card inside Auto Entities in my own dashboards yet
 - Settings for one entity exist for entities you pick by hand, not for the ones a filter finds
 - A media player that can be turned on and off, but is paused, shows its switch as off. Tapping it then turns the player off instead of playing
+- A card that hides itself when it is empty still leaves a gap in Home Assistant's layout. Home Assistant keeps the card's place, most visibly in the Sections view. See [Troubleshooting](https://github.com/oreskov/curio-card/blob/main/docs/troubleshooting.md#the-card-is-empty)
 - A filter shows at most 100 results, unless you turn on **Show all filter results**. Entities you pick by hand are not counted
 
 If you run into any of these, or something else, you are welcome to [open an issue](https://github.com/oreskov/curio-card/issues).

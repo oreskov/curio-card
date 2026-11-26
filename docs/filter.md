@@ -37,6 +37,47 @@ Each rule has a **⧉** button that duplicates it right below. The **Copy** butt
 
 A condition without a value never matches, and a rule with an unfinished condition is ignored.
 
+### Testing other entities
+
+A condition looks at the entity it is tested on. With **Measure on**, the first field in a condition, it can look at other entities instead:
+
+| Measure on | What it does |
+|---|---|
+| **The item itself** | As usual |
+| **Specific entities** | One or more entities you pick. They can be any entities in Home Assistant, also ones that are not on the card |
+| **Pattern** | Entity IDs with `*` as a wildcard, for example `media_player.*` or `sensor.*_battery`. Separate several with commas |
+
+When it does not look at the item itself, **How many must match** appears:
+
+| Choice | The condition matches when |
+|---|---|
+| **At least one** (default) | at least one of the entities matches |
+| **All** | every one of them matches |
+| **None** | none of them matches |
+
+The answer is the same for every entity on the card, so they all show or hide together. Add a condition on the entity itself, for example *Domain* **is** `input_select`, to limit the rule to some of them.
+
+```yaml
+- conditions:
+    - field: domain
+      operator: is
+      value: input_select
+    - entity: media_player.*
+      match: any        # any (default), all or none
+      field: state
+      operator: in
+      value: playing, paused, buffering
+```
+
+- Every field is read from the chosen entities: State, Attribute, Area and so on
+- The card follows the chosen entities live, also when they are not shown on the card, and also when a new entity appears that fits a pattern
+- If no entity is found, **At least one** and **All** do not match, but **None** does. A single entity that does not exist is the same case
+- An unavailable entity is just a state, so *State* **is not** `docked` matches when it is `unavailable`
+- In an **Include** or **Exclude** rule, a condition on other entities gives the same answer for every entity, so it switches the whole rule on or off
+- Several entities are written in YAML as `entity: light.a, light.b`. A condition with `entity` and no `match` means *At least one*
+
+Colour rules and custom groups have the same fields.
+
 ### OR between values in one rule
 
 Rules are OR with each other, but conditions in a rule are AND. To get OR between *values* of the same field, use **is one of** and separate the values with commas:
@@ -45,7 +86,7 @@ Rules are OR with each other, but conditions in a rule are AND. To get OR betwee
 |---|---|---|
 | State | is one of | `playing, paused, buffering` |
 
-This matches every entity whose state is playing, paused or buffering.
+This matches every entity whose state is playing, paused or buffering. To leave values out instead, use **is not one of**: *Domain* **is not one of** `light, switch` matches everything except lights and switches.
 
 ## Fields
 
@@ -73,6 +114,7 @@ An attribute with a list of values matches when any of the values match.
 | **is** | The value is equal. Text ignores upper and lower case |
 | **is not** | None of the values are equal |
 | **is one of** | The value is equal to one of the comma separated values |
+| **is not one of** | The value is equal to none of the comma separated values |
 | **contains** | The value contains the text |
 | **does not contain** | The value does not contain the text |
 | **starts with** | The value starts with the text |
@@ -81,8 +123,8 @@ An attribute with a list of values matches when any of the values match.
 Some details:
 
 - **Numbers are compared as numbers.** `5` is less than `20`, which is not the case for text. If a value is not a number, a number comparison does not match
-- **`*` is a wildcard** in **is**, **is not** and **is one of**. `light.living*` matches every light that starts with `living`. **contains** and **starts with** do not need one
-- An entity with no value for the field (an attribute it does not have, a device class it does not have) matches **is not** and **does not contain**, and nothing else
+- **`*` is a wildcard** in **is**, **is not**, **is one of** and **is not one of**. `light.living*` matches every light that starts with `living`. **contains** and **starts with** do not need one
+- An entity with no value for the field (an attribute it does not have, a device class it does not have) matches **is not**, **is not one of** and **does not contain**, and nothing else
 
 ## Sorting and the order on the card
 
@@ -122,6 +164,8 @@ Two warnings can appear:
 | Lights or switches that are on | **Include:** *Domain* is `light` **and** *State* is `on`. **Include:** *Domain* is `switch` **and** *State* is `on` |
 | Media players that are playing or paused | **Include:** *Domain* is `media_player`. **Show only if:** *State* is one of `playing, paused` |
 | Everything with the label *Dashboard* | **Include:** *Label* is `Dashboard` |
+| Your entities, but only while a vacuum is not docked | **Show only if:** *Measure on* the vacuum, *State* is not `docked` |
+| A selector that shows only while a player is on | **Show only if:** *Domain* is `input_select` **and** *Measure on* **Pattern** `media_player.*`, *At least one*, *State* is one of `playing, paused, buffering` |
 
 More setups are in [Recipes](recipes.md).
 
@@ -163,4 +207,20 @@ filter:
           value: playing, paused
 ```
 
-The fields are `domain`, `entity_id`, `name`, `state`, `attribute` (with `attribute: <name>` on the condition), `device_class`, `area`, `floor`, `label` and `device`. The comparisons are `is`, `is_not`, `in`, `contains`, `not_contains`, `starts_with`, `lt`, `gt`, `lte` and `gte`.
+A condition can be tested on other entities with `entity` (one entity, a comma-separated list, or a pattern with `*`) and `match` (`any`, `all` or `none`). This shows the card's entities only while the vacuum is not docked:
+
+```yaml
+type: custom:curio-card
+entities:
+  - vacuum.robot
+  - sensor.robot_current_room
+filter:
+  only_if:
+    - conditions:
+        - entity: vacuum.robot
+          field: state
+          operator: is_not
+          value: docked
+```
+
+The fields are `domain`, `entity_id`, `name`, `state`, `attribute` (with `attribute: <name>` on the condition), `device_class`, `area`, `floor`, `label` and `device`. The comparisons are `is`, `is_not`, `in`, `not_in`, `contains`, `not_contains`, `starts_with`, `lt`, `gt`, `lte` and `gte`.

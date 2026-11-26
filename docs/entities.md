@@ -50,7 +50,7 @@ Each row is folded and shows a short summary of what is changed on that entity, 
 
 ### Override card settings
 
-Choose **Add override…** to give this entity its own value for a card setting. It works in two steps: first pick a category (**Appearance**, **Interaction**, **Buttons** or **Status indicators**), then the setting inside it. **Hide all buttons** is its own choice in the first list. The overrides you have added are shown under small headings for their category. Switches and lists start with the value the card uses now, so nothing changes until you change it. Text and colour fields start empty and are only saved when you fill them in. Remove an override with the cross beside it, and the entity follows the card again.
+Choose **Add override…** to give this entity its own value for a card setting. It works in two steps: first pick a category (**Layout**, **Appearance**, **Interaction**, **Buttons** or **Status indicators**), then the setting inside it. **Hide all buttons** is its own choice in the first list. The overrides you have added are shown under small headings for their category. Switches and lists start with the value the card uses now, so nothing changes until you change it. Text and colour fields start empty and are only saved when you fill them in. Remove an override with the cross beside it, and the entity follows the card again.
 
 The list only offers settings that make sense for this entity and for your current layout. For example, **Fixed colour** only appears when the card's colours are set to Fixed.
 
@@ -58,12 +58,14 @@ The list only offers settings that make sense for this entity and for your curre
 |---|---|
 | Hide all buttons | Hides controls, the device's own choices, numbers and buttons, your own buttons and the switch. Other entities keep theirs |
 | Fixed colour | A colour of its own, when the card's colours are set to Fixed |
-| Show icon, Show name | Turn the icon or the name on or off |
+| Text alignment | Where the text sits in this item: Automatic, Left, Centre or Right (see [Layouts](layouts.md#text-alignment)) |
+| Show icon, Show name, Hide the device name | Turn the icon or the name on or off, or take the device's name off the start of the name |
 | Secondary information, Attribute name | Which information is shown under the name |
 | Show switch | The on/off switch in list and tiles |
 | Tap on item, Hold on item, Double tap on item | Actions for the whole item |
 | Tap on icon, Hold on icon, Double tap on icon | Actions for the icon |
 | Controls, The device's own choices, numbers and buttons, The device's own controls: order | Which controls this entity has, and in which order the device's own ones come |
+| Button placement | Where the row of buttons sits on this entity (see [Controls and buttons](controls-and-buttons.md#where-the-buttons-sit-and-in-what-order)) |
 | Status indicator, Bubble shows the text, Position | The status marker |
 
 Only the controls and details that fit the type of the entity are offered. A light is offered brightness and Kelvin, a sensor is offered battery, and so on.
@@ -81,9 +83,12 @@ Under the heading you find **Use the card's buttons**, which is on by default:
 - **On:** the entity shows the card's buttons, like every other entity
 - **Off:** the entity gets its own list. It starts empty, so the entity shows **no buttons** while everything else (controls, the switch and so on) stays. Add buttons of your own below, and they are the only ones shown on that entity
 - **Copy the card's buttons here** (shown when the list is on its own and the card has buttons) adds a copy of the card's buttons to the entity's list. Delete the ones you do not want and keep the rest, for example to leave out one of several buttons on one entity
+- If you switch **Use the card's buttons** on while the entity has its own buttons, they are removed. An **Undo: restore the N deleted buttons** button (with the number of buttons) then appears beside it and puts them back, for as long as the editor is open
 - Removing the last button of the entity's own list leaves it empty. Switch **Use the card's buttons** back on to return to the card's buttons
 
 In YAML an empty list does the same: `buttons: []` means no buttons on that entity.
+
+The order of an entity's buttons, including the device's own controls one by one, is set under **Order of the buttons** in the same panel. See [Controls and buttons](controls-and-buttons.md#where-the-buttons-sit-and-in-what-order).
 
 ```yaml
 entities:

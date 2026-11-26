@@ -18,7 +18,7 @@ Grouping splits the items into groups, each with a heading and a count. It is in
 
 Entities that do not belong to any group are collected last in a group of their own: *No area*, *No device*, *No device class*. For *Custom groups* it is called *Other*, and you can rename or hide it (see below).
 
-Grouping works on everything that is on the card: your own entities and the result of the filter. Filter, colours and indicators work as before.
+Grouping works on everything that is on the card: your own entities and the result of the filter. Filter, colours and indicators work the same with and without groups.
 
 Grouping replaces your own [sections and dividers](entities.md#sections-and-dividers). They are kept in the card and come back if you set Group by to None.
 
@@ -42,7 +42,7 @@ These settings appear when Group by is not None.
 With **Custom groups** you decide the groups yourself.
 
 1. Set **Group by** to **Custom groups**.
-2. Choose **Add group**. Add one or more conditions, built in the same way as in the [filter](filter.md#rules-and-conditions). All conditions in a group must match.
+2. Choose **Add group**. Add one or more conditions, built in the same way as in the [filter](filter.md#rules-and-conditions). All conditions in a group must match, and a condition can look at [other entities](filter.md#testing-other-entities).
 3. Give the group a **Group name** and a heading **Colour** under its conditions.
 4. Add more groups. An entity goes into the **first group that matches**, so put the narrow groups first.
 

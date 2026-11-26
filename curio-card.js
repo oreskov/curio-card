@@ -1,5 +1,5 @@
 /*!
- * Curio Card til Home Assistant  (v1.0.0)
+ * Curio Card til Home Assistant  (v1.1.0)
  * https://github.com/oreskov/curio-card  -  MIT-licens
  *
  * Et kort til entiteter, der ændrer sig: en liste, der holder sig opdateret af sig selv.
@@ -31,7 +31,7 @@
   /* ====================================================================
    * 1. KONSTANTER OG TEKSTER
    * ================================================================== */
-  const CURIO_VERSION = '1.0.0';
+  const CURIO_VERSION = '1.1.0';
   const PRESS_FEEDBACK_MS = 1500; // hvor længe en enheds-knap lyser efter et tryk
   const CARD_TAG = 'curio-card';
   const EDITOR_TAG = 'curio-card-editor';
@@ -87,9 +87,9 @@
       'label.device_controls': 'Enhedens egne valg, tal og knapper',
       'help.device_controls': 'Viser også enhedens egne valglister, tal og knapper (fx blæserens vandrette og lodrette svingning eller en afspillers favorit-knap) som styringer på elementet. Kun entiteter fra samme enhed, uden diagnostik og skjulte; knapper til genstart, opdatering og indstillinger vises ikke; højst fire pr. element. Vises ikke i chips.',
       'label.button_press_feedback': 'Enhedens knapper: lys op ved tryk',
-      'help.button_press_feedback': 'Enhedens egne knapper lyser kort op, når du trykker, så du kan se, at trykket blev sendt. Knappen ved ikke, om handlingen lykkedes. Standard: Til.',
+      'help.button_press_feedback': 'Enhedens egne knapper lyser kort op, når du trykker, så du kan se, at trykket blev sendt. Knappen ved ikke, om handlingen lykkedes.',
       'label.device_controls_order': 'Enhedens egne styringer: rækkefølge',
-      'help.device_controls_order': 'Hvilke af enhedens egne styringer der kommer først, når der er flere end fire. Standard: Knapper først.',
+      'help.device_controls_order': 'Hvilke af enhedens egne styringer der kommer først, når der er flere end fire.',
       'o.device_controls_order.buttons': 'Knapper først',
       'o.device_controls_order.values': 'Valg og tal først',
       'ui.ctl_intro': 'Vælg de styringer, du vil have. Her vises kun de typer, der findes i kortet. Hvert element viser kun dem, det kan.',
@@ -147,6 +147,64 @@
       'help.group_align': 'Hvor overskriften står i bredden.',
       'label.group_count': 'Vis antal',
       'help.group_count': 'Viser antal elementer i gruppen efter navnet, fx (5).',
+      'label.title_size': 'Titlens størrelse',
+      'help.title_size': 'Størrelsen på titlen. M er standard.',
+      'label.title_color': 'Titlens farve',
+      'help.title_color': 'Farve på titlen (tekst og eventuel streg eller baggrund). Tom = normal tekstfarve.',
+      'label.title_align': 'Titlens placering',
+      'help.title_align': 'Hvor titlen står i bredden.',
+      'label.title_style': 'Titlens stil',
+      'help.title_style': 'Kun tekst, tekst med streg under, eller tekst på en afrundet baggrund i en svag nuance af farven.',
+      'label.title_animation': 'Titlens animation',
+      'help.title_animation': 'Valgfri animation af titlen. Ingen = ingen bevægelse. Følger systemets indstilling om reduceret bevægelse.',
+      'label.title_speed': 'Titlens animationshastighed',
+      'help.title_speed': 'Hvor hurtigt animationen af titlen kører.',
+      'o.title_size.s': 'S',
+      'o.title_size.m': 'M',
+      'o.title_size.l': 'L',
+      'o.title_size.xl': 'XL',
+      'o.title_align.left': 'Venstre',
+      'o.title_align.center': 'Midt',
+      'o.title_align.right': 'Højre',
+      'o.title_style.plain': 'Kun tekst',
+      'o.title_style.line': 'Med streg',
+      'o.title_style.fill': 'Med baggrund',
+      'o.title_animation.none': 'Ingen',
+      'o.title_animation.pulse': 'Puls',
+      'o.title_animation.blink': 'Blink',
+      'o.title_animation.glow': 'Glød',
+      'o.title_speed.slow': 'Langsom',
+      'o.title_speed.normal': 'Normal',
+      'o.title_speed.fast': 'Hurtig',
+      'label.empty_size': 'Tekst når tom: størrelse',
+      'help.empty_size': 'Størrelsen på teksten når tom. M er standard.',
+      'label.empty_color': 'Tekst når tom: farve',
+      'help.empty_color': 'Farve på teksten når tom (tekst og eventuel streg eller baggrund). Tom = normal tekstfarve.',
+      'label.empty_align': 'Tekst når tom: placering',
+      'help.empty_align': 'Hvor teksten når tom står i bredden.',
+      'label.empty_style': 'Tekst når tom: stil',
+      'help.empty_style': 'Kun tekst, tekst med streg under, eller tekst på en afrundet baggrund i en svag nuance af farven.',
+      'label.empty_animation': 'Tekst når tom: animation',
+      'help.empty_animation': 'Valgfri animation af teksten når tom. Ingen = ingen bevægelse. Følger systemets indstilling om reduceret bevægelse.',
+      'label.empty_speed': 'Tekst når tom: animationshastighed',
+      'help.empty_speed': 'Hvor hurtigt animationen af teksten når tom kører.',
+      'o.empty_size.s': 'S',
+      'o.empty_size.m': 'M',
+      'o.empty_size.l': 'L',
+      'o.empty_size.xl': 'XL',
+      'o.empty_align.left': 'Venstre',
+      'o.empty_align.center': 'Midt',
+      'o.empty_align.right': 'Højre',
+      'o.empty_style.plain': 'Kun tekst',
+      'o.empty_style.line': 'Med streg',
+      'o.empty_style.fill': 'Med baggrund',
+      'o.empty_animation.none': 'Ingen',
+      'o.empty_animation.pulse': 'Puls',
+      'o.empty_animation.blink': 'Blink',
+      'o.empty_animation.glow': 'Glød',
+      'o.empty_speed.slow': 'Langsom',
+      'o.empty_speed.normal': 'Normal',
+      'o.empty_speed.fast': 'Hurtig',
       'o.group_size.s': 'S',
       'o.group_size.m': 'M',
       'o.group_size.l': 'L',
@@ -201,6 +259,8 @@
       'label.color': 'Fast farve',
       'label.show_icon': 'Vis ikon',
       'label.show_name': 'Vis navn',
+      'label.name_hide_device': 'Skjul enhedens navn',
+      'help.name_hide_device': 'Fjerner enhedens navn fra begyndelsen af navnet, så fx «Asus XT8 External IP» bliver til «External IP». Navne, du selv har skrevet, ændres ikke, og er navnet det samme som enhedens, beholdes det.',
       'label.long_text': 'Lang tekst',
       'help.long_text': 'Hvad der sker, når navn eller sekundær info er for lang til elementet. Rul: teksten ruller langsomt frem og tilbage (kun hvis den ikke passer). Afkort: teksten afkortes med …. Ruller ikke i chips.',
       'o.long_text.scroll': 'Rul',
@@ -216,6 +276,23 @@
       'label.sort_manual': 'Sortér også manuelle entiteter',
       'help.sort_manual': 'Manuelt valgte entiteter følger samme sortering som filterets resultat og blandes sammen med dem. Med sektioner/skillelinjer sorteres inden for hver sektion, og filterets resultat kommer ind i den sidste. Fra: de manuelle står først i den rækkefølge, du selv har sat.',
       'label.sort_dir': 'Retning',
+      'label.c_target': 'Måler på',
+      'help.c_target': 'Elementet selv (som normalt), bestemte entiteter, eller et mønster som media_player.*. Med entiteter eller mønster er svaret ens for alle elementer.',
+      'label.c_entities': 'Entiteter',
+      'help.c_entities': 'Entiteterne, betingelsen testes på. Det kan være alle entiteter i HA, også dem der ikke vises på kortet.',
+      'label.c_pattern': 'Mønster',
+      'help.c_pattern': 'Entitets-ID med * som joker, fx media_player.* eller sensor.*_batteri. Flere kan skrives med komma imellem.',
+      'label.c_match': 'Hvor mange skal passe',
+      'help.c_match': 'Mindst én, alle eller ingen af entiteterne skal passe på betingelsen. Findes ingen entiteter, passer Mindst én og Alle ikke, men Ingen passer.',
+      'o.target.self': 'Elementet selv',
+      'o.target.list': 'Bestemte entiteter',
+      'o.target.pattern': 'Mønster',
+      'o.match.any': 'Mindst én',
+      'o.match.all': 'Alle',
+      'o.match.none': 'Ingen',
+      'ui.match_any_of': 'Mindst én af',
+      'ui.match_all_of': 'Alle af',
+      'ui.match_none_of': 'Ingen af',
       'label.c_field': 'Felt',
       'label.c_attribute': 'Attributnavn',
       'label.c_operator': 'Sammenligning',
@@ -378,6 +455,7 @@
       'o.operator.is': 'er',
       'o.operator.is_not': 'er ikke',
       'o.operator.in': 'er en af',
+      'o.operator.not_in': 'er ikke en af',
       'o.operator.contains': 'indeholder',
       'o.operator.not_contains': 'indeholder ikke',
       'o.operator.starts_with': 'starter med',
@@ -418,6 +496,12 @@
       'o.background.filled': 'Udfyldt',
       'o.background.outlined': 'Kun kant',
       'o.background.transparent': 'Gennemsigtig',
+      'label.text_align': 'Tekstplacering',
+      'help.text_align': 'Hvor teksten står i elementet: navn, stor værdi og sekundære linjer. Automatisk følger ikonets placering. Det er noget andet end Justering, som placerer selve elementerne i bredden. Knapperne følger ikke med, de har deres egen placering.',
+      'o.text_align.auto': 'Automatisk',
+      'o.text_align.left': 'Venstre',
+      'o.text_align.center': 'Midten',
+      'o.text_align.right': 'Højre',
       'label.icon_position': 'Ikonplacering',
       'help.icon_position': 'Hvor ikonet sidder i elementet. Chips og liste: venstre eller højre. Tiles: venstre, øverst eller højre. Grid: øverst til venstre, midt eller højre.',
       'o.icon_position.left': 'Venstre',
@@ -439,6 +523,13 @@
       'o.button_size.m': 'M',
       'o.button_size.l': 'L',
       'o.button_size.xl': 'XL',
+      'label.buttons_position': 'Knappernes placering',
+      'help.buttons_position': 'Hvor knapperne står i forhold til teksten. Automatisk er til højre, og under teksten når ikonet står øverst. Valget flytter hele rækken af knapper: kortets knapper, enhedens styringer og dine egne knapper.',
+      'o.buttons_position.auto': 'Automatisk',
+      'o.buttons_position.right': 'Til højre for teksten',
+      'o.buttons_position.left': 'Til venstre for teksten',
+      'o.buttons_position.below': 'Under teksten',
+      'o.buttons_position.above': 'Over teksten',
       'label.big_value': 'Stor værdi',
       'help.big_value': 'Viser den første sekundære information (fx 18 %) stort i elementets farve. Over navnet, når ikonet står øverst, ellers under navnet.',
       'o.indicator.none': 'Ingen',
@@ -476,6 +567,11 @@
       'ui.buttons_intro': 'Egne knapper er runde ikonknapper ved siden af (grid: under) elementets tekst og kan udføre en vilkårlig handling. Kalder en handling en service uden mål, rammer den elementets egen entitet. Knapper kan også sættes pr. entitet under Entiteter → Tilpas pr. entitet.',
       'ui.add_button': 'Tilføj knap',
       'ui.button_n': 'Knap {n}',
+      'ui.order_title': 'Rækkefølge på knapperne',
+      'ui.order_hint': 'Flyt knapperne med ↑ og ↓. Knapper, du ikke har flyttet, står bagefter i den normale rækkefølge.',
+      'ui.order_devices': 'Enhedens styringer (som gruppe)',
+      'ui.order_reset': 'Nulstil rækkefølgen',
+      'ui.order_reset_item': 'Brug kortets rækkefølge',
       'ui.remove_button': 'Fjern knap',
       'ui.include': 'Medtag',
       'ui.exclude': 'Udelad',
@@ -550,6 +646,7 @@
       'ui.item_buttons': 'Egne knapper på denne entitet',
       'ui.item_buttons_hint': 'Har entiteten egne knapper, bruges de i stedet for kortets egne knapper.',
       'ui.item_use_card_buttons': 'Brug kortets knapper',
+      'ui.item_undo_buttons': 'Fortryd: gendan de {n} slettede knapper',
       'ui.item_use_card_buttons_hint': 'Slå fra for at give entiteten sin egen liste. Den starter tom (ingen knapper), og du kan tilføje egne herunder.',
       'ui.item_copy_card_buttons': 'Kopiér kortets knapper hertil',
       'label.hide_buttons': 'Skjul alle knapper',
@@ -611,9 +708,9 @@
       'label.device_controls': 'The device\'s own choices, numbers and buttons',
       'help.device_controls': 'Also shows the device\'s own select lists, numbers and buttons (for example a fan\'s horizontal and vertical swing, or a player\'s favorite button) as controls on the item. Only entities from the same device, without diagnostic or hidden ones; buttons for restart, update and configuration are left out; at most four per item. Not shown in chips.',
       'label.button_press_feedback': 'Device buttons: light up when pressed',
-      'help.button_press_feedback': 'The device\'s own buttons light up briefly when you press them, so you can see the press was sent. The button does not know whether the action succeeded. Default: On.',
+      'help.button_press_feedback': 'The device\'s own buttons light up briefly when you press them, so you can see the press was sent. The button does not know whether the action succeeded.',
       'label.device_controls_order': 'The device\'s own controls: order',
-      'help.device_controls_order': 'Which of the device\'s own controls come first when there are more than four. Default: Buttons first.',
+      'help.device_controls_order': 'Which of the device\'s own controls come first when there are more than four.',
       'o.device_controls_order.buttons': 'Buttons first',
       'o.device_controls_order.values': 'Choices and numbers first',
       'ui.ctl_intro': 'Choose the controls you want. Only the types present in the card are listed. Each item shows only the ones it supports.',
@@ -670,6 +767,64 @@
       'help.group_align': 'Where the heading sits across the width.',
       'label.group_count': 'Show count',
       'help.group_count': 'Shows the number of items in the group after the name, for example (5).',
+      'label.title_size': 'Title size',
+      'help.title_size': 'The size of the title. M is the default.',
+      'label.title_color': 'Title colour',
+      'help.title_color': 'Colour of the title (text and any line or background). Empty = normal text colour.',
+      'label.title_align': 'Title alignment',
+      'help.title_align': 'Where the title sits across the width.',
+      'label.title_style': 'Title style',
+      'help.title_style': 'Text only, text with a line below, or text on a rounded background in a faint shade of the colour.',
+      'label.title_animation': 'Title animation',
+      'help.title_animation': 'Optional animation of the title. None = no motion. Follows the system setting for reduced motion.',
+      'label.title_speed': 'Title animation speed',
+      'help.title_speed': 'How fast the animation of the title runs.',
+      'o.title_size.s': 'S',
+      'o.title_size.m': 'M',
+      'o.title_size.l': 'L',
+      'o.title_size.xl': 'XL',
+      'o.title_align.left': 'Left',
+      'o.title_align.center': 'Centre',
+      'o.title_align.right': 'Right',
+      'o.title_style.plain': 'Text only',
+      'o.title_style.line': 'With line',
+      'o.title_style.fill': 'With background',
+      'o.title_animation.none': 'None',
+      'o.title_animation.pulse': 'Pulse',
+      'o.title_animation.blink': 'Blink',
+      'o.title_animation.glow': 'Glow',
+      'o.title_speed.slow': 'Slow',
+      'o.title_speed.normal': 'Normal',
+      'o.title_speed.fast': 'Fast',
+      'label.empty_size': 'Empty text: size',
+      'help.empty_size': 'The size of the empty text. M is the default.',
+      'label.empty_color': 'Empty text: colour',
+      'help.empty_color': 'Colour of the empty text (text and any line or background). Empty = normal text colour.',
+      'label.empty_align': 'Empty text: alignment',
+      'help.empty_align': 'Where the empty text sits across the width.',
+      'label.empty_style': 'Empty text: style',
+      'help.empty_style': 'Text only, text with a line below, or text on a rounded background in a faint shade of the colour.',
+      'label.empty_animation': 'Empty text: animation',
+      'help.empty_animation': 'Optional animation of the empty text. None = no motion. Follows the system setting for reduced motion.',
+      'label.empty_speed': 'Empty text: animation speed',
+      'help.empty_speed': 'How fast the animation of the empty text runs.',
+      'o.empty_size.s': 'S',
+      'o.empty_size.m': 'M',
+      'o.empty_size.l': 'L',
+      'o.empty_size.xl': 'XL',
+      'o.empty_align.left': 'Left',
+      'o.empty_align.center': 'Centre',
+      'o.empty_align.right': 'Right',
+      'o.empty_style.plain': 'Text only',
+      'o.empty_style.line': 'With line',
+      'o.empty_style.fill': 'With background',
+      'o.empty_animation.none': 'None',
+      'o.empty_animation.pulse': 'Pulse',
+      'o.empty_animation.blink': 'Blink',
+      'o.empty_animation.glow': 'Glow',
+      'o.empty_speed.slow': 'Slow',
+      'o.empty_speed.normal': 'Normal',
+      'o.empty_speed.fast': 'Fast',
       'o.group_size.s': 'S',
       'o.group_size.m': 'M',
       'o.group_size.l': 'L',
@@ -723,6 +878,8 @@
       'label.color': 'Fixed colour',
       'label.show_icon': 'Show icon',
       'label.show_name': 'Show name',
+      'label.name_hide_device': 'Hide the device name',
+      'help.name_hide_device': 'Removes the device name from the start of the name, so for example "Asus XT8 External IP" becomes "External IP". Names you have written yourself are not changed, and if the name is the same as the device\'s it is kept.',
       'label.long_text': 'Long text',
       'help.long_text': 'What happens when the name or secondary info is too long for the item. Scroll: the text slowly scrolls back and forth (only if it does not fit). Truncate: the text is cut off with …. Does not scroll in chips.',
       'o.long_text.scroll': 'Scroll',
@@ -738,6 +895,23 @@
       'label.sort_manual': 'Also sort manual entities',
       'help.sort_manual': 'Manually chosen entities follow the same sorting as the filter result and are mixed in with it. With sections/dividers, sorting happens within each section and the filter result goes into the last one. Off: the manual ones come first in the order you set yourself.',
       'label.sort_dir': 'Direction',
+      'label.c_target': 'Measure on',
+      'help.c_target': 'The item itself (as usual), specific entities, or a pattern such as media_player.*. With entities or a pattern the result is the same for every item.',
+      'label.c_entities': 'Entities',
+      'help.c_entities': 'The entities the condition is tested on. They can be any entities in HA, also ones the card does not show.',
+      'label.c_pattern': 'Pattern',
+      'help.c_pattern': 'Entity ID with * as a wildcard, for example media_player.* or sensor.*_battery. Separate several with commas.',
+      'label.c_match': 'How many must match',
+      'help.c_match': 'At least one, all or none of the entities must match the condition. If there are no entities, At least one and All do not match, but None does.',
+      'o.target.self': 'The item itself',
+      'o.target.list': 'Specific entities',
+      'o.target.pattern': 'Pattern',
+      'o.match.any': 'At least one',
+      'o.match.all': 'All',
+      'o.match.none': 'None',
+      'ui.match_any_of': 'At least one of',
+      'ui.match_all_of': 'All of',
+      'ui.match_none_of': 'None of',
       'label.c_field': 'Field',
       'label.c_attribute': 'Attribute name',
       'label.c_operator': 'Comparison',
@@ -898,6 +1072,7 @@
       'o.operator.is': 'is',
       'o.operator.is_not': 'is not',
       'o.operator.in': 'is one of',
+      'o.operator.not_in': 'is not one of',
       'o.operator.contains': 'contains',
       'o.operator.not_contains': 'does not contain',
       'o.operator.starts_with': 'starts with',
@@ -938,6 +1113,12 @@
       'o.background.filled': 'Filled',
       'o.background.outlined': 'Outline only',
       'o.background.transparent': 'Transparent',
+      'label.text_align': 'Text alignment',
+      'help.text_align': 'Where the text sits in the item: name, big value and secondary lines. Automatic follows the icon position. This is not the same as Alignment, which places the items themselves across the width. The buttons do not follow, they have their own placement.',
+      'o.text_align.auto': 'Automatic',
+      'o.text_align.left': 'Left',
+      'o.text_align.center': 'Centre',
+      'o.text_align.right': 'Right',
       'label.icon_position': 'Icon position',
       'help.icon_position': 'Where the icon sits in the item. Chips and list: left or right. Tiles: left, top or right. Grid: top left, centre or right.',
       'o.icon_position.left': 'Left',
@@ -959,6 +1140,13 @@
       'o.button_size.m': 'M',
       'o.button_size.l': 'L',
       'o.button_size.xl': 'XL',
+      'label.buttons_position': 'Button placement',
+      'help.buttons_position': 'Where the buttons sit in relation to the text. Automatic is to the right, and below the text when the icon is on top. The choice moves the whole row of buttons: the card\'s buttons, the device\'s controls and your own buttons.',
+      'o.buttons_position.auto': 'Automatic',
+      'o.buttons_position.right': 'To the right of the text',
+      'o.buttons_position.left': 'To the left of the text',
+      'o.buttons_position.below': 'Below the text',
+      'o.buttons_position.above': 'Above the text',
       'label.big_value': 'Big value',
       'help.big_value': 'Shows the first secondary information (for example 18 %) large, in the item\'s colour. Above the name when the icon is on top, otherwise below the name.',
       'o.indicator.none': 'None',
@@ -994,6 +1182,11 @@
       'ui.buttons_intro': 'Custom buttons are round icon buttons next to (grid: below) the item\'s text and can run any action. If an action calls a service without a target, it hits the item\'s own entity. Buttons can also be set per entity under Entities → Customise per entity.',
       'ui.add_button': 'Add button',
       'ui.button_n': 'Button {n}',
+      'ui.order_title': 'Order of the buttons',
+      'ui.order_hint': 'Move the buttons with ↑ and ↓. Buttons you have not moved come afterwards in the normal order.',
+      'ui.order_devices': 'The device\'s controls (as a group)',
+      'ui.order_reset': 'Reset the order',
+      'ui.order_reset_item': 'Use the card\'s order',
       'ui.remove_button': 'Remove button',
       'ui.include': 'Include',
       'ui.exclude': 'Exclude',
@@ -1068,6 +1261,7 @@
       'ui.item_buttons': 'Own buttons on this entity',
       'ui.item_buttons_hint': 'If the entity has its own buttons, they are used instead of the card\'s own buttons.',
       'ui.item_use_card_buttons': 'Use the card\'s buttons',
+      'ui.item_undo_buttons': 'Undo: restore the {n} deleted buttons',
       'ui.item_use_card_buttons_hint': 'Turn off to give this entity its own list. It starts empty (no buttons), and you can add your own below.',
       'ui.item_copy_card_buttons': 'Copy the card\'s buttons here',
       'label.hide_buttons': 'Hide all buttons',
@@ -1114,16 +1308,30 @@
   ];
   const action = (a) => ({ action: a });
 
+  const TEXT_ANIMS = ['none', 'pulse', 'blink', 'glow']; // valgfri animation af titel og tekst når tom
   const SETTINGS = [
     // Layout
     { key: 'layout', section: 'layout', type: 'select', options: LAYOUT_IDS, def: 'tiles' },
     { key: 'align', section: 'layout', type: 'select', options: ['stretch', 'start', 'center', 'end', 'space-between'], def: (l) => (l === 'chips' ? 'start' : 'stretch'), layouts: ['chips', 'tiles', 'grid'] },
     { key: 'icon_position', section: 'layout', type: 'select', options: ['left', 'top', 'right', 'top_center', 'top_right'], optionsFor: (l) => (l === 'grid' ? ['top', 'top_center', 'top_right'] : l === 'tiles' ? ['left', 'top', 'right'] : ['left', 'right']), def: (l) => (l === 'grid' ? 'top' : 'left') },
+    { key: 'text_align', section: 'layout', type: 'select', options: ['auto', 'left', 'center', 'right'], def: 'auto', item: true, layouts: ['tiles', 'list', 'grid'] },
     { key: 'columns', section: 'layout', type: 'number', min: 0, max: 8, step: 1, def: 0, layouts: ['tiles', 'grid'] },
     { key: 'item_width', section: 'layout', type: 'number', min: 0, max: 600, step: 10, unit: 'px', mode: 'slider', def: 0, layouts: ['tiles', 'grid'], when: (e) => !(Number(e.columns) > 0) },
     { key: 'gap', section: 'layout', type: 'number', min: 0, max: 32, step: 1, unit: 'px', mode: 'slider', def: (l) => (l === 'chips' ? 6 : l === 'list' ? 4 : 8) },
     { key: 'title', section: 'layout', type: 'text', def: '' },
+    { key: 'title_size', section: 'layout', type: 'select', options: ['s', 'm', 'l', 'xl'], def: 'm', when: (e) => !!e.title },
+    { key: 'title_color', section: 'layout', type: 'color', def: '', when: (e) => !!e.title },
+    { key: 'title_align', section: 'layout', type: 'select', options: ['left', 'center', 'right'], def: 'left', when: (e) => !!e.title },
+    { key: 'title_style', section: 'layout', type: 'select', options: ['plain', 'line', 'fill'], def: 'plain', when: (e) => !!e.title },
+    { key: 'title_animation', section: 'layout', type: 'select', options: TEXT_ANIMS, def: 'none', when: (e) => !!e.title },
+    { key: 'title_speed', section: 'layout', type: 'select', options: ['slow', 'normal', 'fast'], def: 'normal', when: (e) => !!e.title && !!e.title_animation && e.title_animation !== 'none' },
     { key: 'empty_text', section: 'layout', type: 'text', def: '' },
+    { key: 'empty_size', section: 'layout', type: 'select', options: ['s', 'm', 'l', 'xl'], def: 'm' },
+    { key: 'empty_color', section: 'layout', type: 'color', def: '' },
+    { key: 'empty_align', section: 'layout', type: 'select', options: ['left', 'center', 'right'], def: 'left' },
+    { key: 'empty_style', section: 'layout', type: 'select', options: ['plain', 'line', 'fill'], def: 'plain' },
+    { key: 'empty_animation', section: 'layout', type: 'select', options: TEXT_ANIMS, def: 'none' },
+    { key: 'empty_speed', section: 'layout', type: 'select', options: ['slow', 'normal', 'fast'], def: 'normal', when: (e) => !!e.empty_animation && e.empty_animation !== 'none' },
     // Gruppering
     { key: 'group_by', section: 'grouping', type: 'select', options: ['none', 'area', 'device', 'device_class', 'domain', 'state', 'custom'], def: 'none' },
     { key: 'group_size', section: 'grouping', type: 'select', options: ['s', 'm', 'l', 'xl'], def: 'm', when: (e) => e.group_by && e.group_by !== 'none' },
@@ -1143,9 +1351,10 @@
     { key: 'show_icon', section: 'appearance', type: 'boolean', def: true, item: true },
     { key: 'icon_size', section: 'appearance', type: 'select', options: ['auto', 's', 'm', 'l', 'xl'], def: 'auto', when: (e) => e.show_icon },
     { key: 'show_name', section: 'appearance', type: 'boolean', def: true, item: true },
+    { key: 'name_hide_device', section: 'appearance', type: 'boolean', def: false, item: true, when: (e) => e.show_name !== false },
     { key: 'long_text', section: 'appearance', type: 'select', options: ['scroll', 'truncate'], def: 'scroll', layouts: ['tiles', 'list', 'grid'] },
     { key: 'secondary_info', section: 'appearance', type: 'multiselect', options: ['state', 'brightness', 'kelvin', 'cover_position', 'cover_tilt', 'fan_speed', 'climate_temps', 'climate_action', 'vacuum_fan', 'battery', 'media_title', 'media_volume', 'dev_signal', 'dev_power', 'dev_energy', 'dev_temperature', 'dev_humidity', 'last_changed', 'attribute'], def: (l) => (l === 'chips' ? [] : ['state']), item: true },
-    { key: 'big_value', section: 'appearance', type: 'boolean', def: false, layouts: ['tiles', 'grid'], when: (e) => e.secondary_info.length > 0 },
+    { key: 'big_value', section: 'appearance', type: 'boolean', def: false, item: true, layouts: ['tiles', 'grid'], when: (e) => e.secondary_info.length > 0 },
     { key: 'secondary_attribute', section: 'appearance', type: 'text', def: '', item: true, when: (e) => e.secondary_info.includes('attribute') },
     { key: 'card_plain', section: 'appearance', type: 'boolean', def: false },
     { key: 'card_opacity', section: 'appearance', type: 'number', min: 0, max: 100, step: 5, unit: 'percent', mode: 'slider', def: 100, when: (e) => !e.card_plain },
@@ -1168,6 +1377,7 @@
     { key: 'device_controls_order', section: 'buttons', type: 'select', options: ['buttons', 'values'], def: 'buttons', item: true, layouts: ['tiles', 'list', 'grid'], when: (e) => !!e.device_controls },
     { key: 'button_press_feedback', section: 'buttons', type: 'boolean', def: true, item: true, layouts: ['tiles', 'list', 'grid'], when: (e) => !!e.device_controls },
     { key: 'button_size', section: 'buttons', type: 'select', options: ['auto', 's', 'm', 'l', 'xl'], def: 'auto', layouts: ['tiles', 'list', 'grid'] },
+    { key: 'buttons_position', section: 'buttons', type: 'select', options: ['auto', 'right', 'left', 'below', 'above'], def: 'auto', item: true, layouts: ['tiles', 'list', 'grid'] },
     { key: 'button_color', section: 'buttons', type: 'color', def: '', layouts: ['tiles', 'list', 'grid'] },
     { key: 'controls_autoclose', section: 'buttons', type: 'number', min: 0, max: 30, step: 1, unit: 's', mode: 'slider', def: 0, layouts: ['tiles', 'list', 'grid'] },
     // Statusindikatorer
@@ -1292,7 +1502,25 @@
     return 'var(--state-' + d + '-inactive-color, var(--state-inactive-color, var(--disabled-text-color)))';
   }
 
-  function itemName(hass, item) {
+  // Navnet uden enhedens navn foran ('Asus XT8 External IP' -> 'External IP'). Kun når enhedens navn står først, og kun hvis der er mere tilbage.
+  function withoutDeviceName(hass, item, name) {
+    const reg = hass && hass.entities && hass.entities[item.id];
+    const dev = reg && reg.device_id && hass.devices ? hass.devices[reg.device_id] : null;
+    if (!dev) return name;
+    for (const dn of [dev.name_by_user, dev.name]) {
+      if (typeof dn !== 'string' || !dn) continue;
+      if (name.length > dn.length && name.slice(0, dn.length).toLowerCase() === dn.toLowerCase() && /\s/.test(name.charAt(dn.length))) {
+        const rest = name.slice(dn.length).trim();
+        if (rest) return rest;
+      }
+    }
+    return name;
+  }
+  function itemName(hass, item, hideDevice) {
+    const base = itemNameFull(hass, item);
+    return hideDevice && !(typeof item.obj.name === 'string' && item.obj.name) ? withoutDeviceName(hass, item, base) : base;
+  }
+  function itemNameFull(hass, item) {
     const n = item.obj.name;
     if (item.stateObj && hass && typeof hass.formatEntityName === 'function') {
       try {
@@ -1509,6 +1737,7 @@
     { id: 'is', test: (v, e) => v.some((a) => eqVal(a, e)) },
     { id: 'is_not', test: (v, e) => !v.some((a) => eqVal(a, e)) },
     { id: 'in', test: (v, e) => splitList(e).some((x) => v.some((a) => eqVal(a, x))) },
+    { id: 'not_in', test: (v, e) => !splitList(e).some((x) => v.some((a) => eqVal(a, x))) },
     { id: 'contains', test: (v, e) => v.some((a) => lower(a).includes(lower(e))) },
     { id: 'not_contains', test: (v, e) => !v.some((a) => lower(a).includes(lower(e))) },
     { id: 'starts_with', test: (v, e) => v.some((a) => lower(a).startsWith(lower(e))) },
@@ -1537,12 +1766,54 @@
   ];
   const FIELD_BY_ID = Object.fromEntries(FIELDS.map((f) => [f.id, f]));
 
+  // En betingelse kan måles på andre entiteter end elementet selv (feltet 'entity'). Tom = elementet selv.
+  // 'entity' er ét id, flere adskilt med komma, eller mønstre med * (fx media_player.*). 'match' (any | all | none) siger,
+  // om mindst én, alle eller ingen af dem skal passe.
+  const condEntity = (c) => (c && typeof c.entity === 'string' ? c.entity.trim() : '');
+  const hasWild = (t) => t.indexOf('*') >= 0;
+  const _tg = new Map();
+  const targetsOf = (text) => { let r = _tg.get(text); if (!r) { r = splitList(text); _tg.set(text, r); } return r; };
+  const condTargets = (c) => targetsOf(condEntity(c));
+  const condMode = (c) => (c && (c.match === 'all' || c.match === 'none') ? c.match : 'any');
+  // Mønstre løses op mod HA's entiteter; resultatet huskes pr. tilstandsobjekt, så det kun beregnes én gang pr. opdatering.
+  const _resolveMemo = new WeakMap();
+  function resolveTarget(t, hass) {
+    const st = hass && hass.states;
+    if (!st) return [];
+    if (!hasWild(t)) return st[t] ? [t] : [];
+    let m = _resolveMemo.get(st);
+    if (!m) { m = new Map(); _resolveMemo.set(st, m); }
+    let r = m.get(t);
+    if (!r) { const re = wildRe(t); r = []; for (const id in st) if (re.test(id)) r.push(id); m.set(t, r); }
+    return r;
+  }
+  function resolveTargets(list, hass) {
+    if (list.length === 1) return resolveTarget(list[0], hass);
+    const seen = new Set();
+    const out = [];
+    for (const t of list) for (const id of resolveTarget(t, hass)) if (!seen.has(id)) { seen.add(id); out.push(id); }
+    return out;
+  }
+  // Alle entiteter og mønstre, som betingelserne i en liste af regler peger på.
+  function ruleRefs(list, into) {
+    const out = into || new Set();
+    if (Array.isArray(list)) for (const r of list) if (r && Array.isArray(r.conditions)) for (const c of r.conditions) for (const t of condTargets(c)) out.add(t);
+    return out;
+  }
+
   function condMatches(cond, ctx) {
     const f = FIELD_BY_ID[cond.field];
     const o = OPERATOR_BY_ID[cond.operator];
     const exp = cond.value === undefined || cond.value === null ? '' : String(cond.value).trim();
     if (!f || !o || exp === '') return false; // ufærdig betingelse passer aldrig
-    return o.test(f.get(ctx, cond), exp);
+    const tg = condTargets(cond);
+    if (!tg.length) return o.test(f.get(ctx, cond), exp);
+    const ids = resolveTargets(tg, ctx.hass);
+    const hit = (id) => o.test(f.get({ id, so: ctx.hass.states[id], hass: ctx.hass }, cond), exp);
+    const mode = condMode(cond);
+    if (mode === 'none') return !ids.some(hit);
+    if (!ids.length) return false; // ingen træf: 'mindst én' og 'alle' passer ikke
+    return mode === 'all' ? ids.every(hit) : ids.some(hit);
   }
 
   // Regler uden gyldige felter/sammenligninger eller uden betingelser ignoreres.
@@ -1580,8 +1851,11 @@
     if (!inc.length) return null;
     const exc = cleanRules(filter && filter.exclude);
     const ruleHit = (conds, ctx) => conds.every((c) => condMatches(c, ctx));
+    const refT = [...ruleRefs(filter && filter.include, ruleRefs(filter && filter.exclude))];
+    let refKey = '';
     const cache = new Map();
     let refs = null;
+    let refSt = null;
     let matched = [];
     let ver = 0;
     let memo = null;
@@ -1590,7 +1864,11 @@
         if (!hass || !hass.states) return false;
         let dirty = false;
         const r = [hass.entities, hass.devices, hass.areas, hass.floors, hass.labels];
-        if (!refs || r.some((x, i) => x !== refs[i])) { cache.clear(); refs = r; dirty = true; }
+        const rid = refT.length ? resolveTargets(refT, hass) : [];
+        const rs = rid.map((id) => hass.states[id]);
+        const rk = rid.length ? rid.join('|') : '';
+        if (!refs || r.some((x, i) => x !== refs[i]) || (refSt && (rk !== refKey || rs.some((x, i) => x !== refSt[i])))) { cache.clear(); refs = r; dirty = true; }
+        refSt = rs; refKey = rk;
         let seen = 0;
         for (const id in hass.states) {
           seen++;
@@ -2204,7 +2482,43 @@
   function ownButtonList(ctx, item) {
     return (Array.isArray(item.obj.buttons) ? item.obj.buttons : Array.isArray(ctx.buttons) ? ctx.buttons : []).filter((b) => b && typeof b === 'object');
   }
+  // Rækkefølge på knapperne: de navngivne står først i den valgte rækkefølge, resten bagefter i normal rækkefølge.
+  // 'devices' står for alle enhedens styringer som gruppe.
+  function applyButtonOrder(entries, order) {
+    if (!Array.isArray(order) || !order.length) return entries;
+    const out = [];
+    const used = new Set();
+    const take = (e) => { if (!used.has(e)) { used.add(e); out.push(e); } };
+    for (const t of order) {
+      if (t === 'devices') entries.filter((e) => typeof e.id === 'string' && (e.id === 'devices' || e.id.indexOf('dev:') === 0)).forEach(take);
+      else { const e = entries.find((x) => x.id === t); if (e) take(e); }
+    }
+    entries.forEach(take);
+    return out;
+  }
   const controlIcon = (def, so) => (typeof def.icon === 'function' ? def.icon(so) : def.icon);
+
+  // Knapperne, som en entitet (perEntity) eller kortet har, til rækkefølge-listen i editoren.
+  function buttonOrderItems(hass, id, o, cfg, perEntity) {
+    const val = (k) => (o && o[k] !== undefined ? o[k] : cfg[k]);
+    const so = hass && hass.states && id ? hass.states[id] : null;
+    const domain = id ? String(id).split('.')[0] : '';
+    const item = { kind: 'entity', id, domain, stateObj: so, obj: o || {}, missing: !so };
+    const out = [];
+    for (const k of normMulti(SETTING_BY_KEY.controls, val('controls'), 'tiles')) {
+      const def = CONTROL_BY_ID[k];
+      if (!def) continue;
+      if (perEntity && (!so || !def.domain.includes(domain) || !def.avail(so, item))) continue;
+      out.push({ id: k, label: tr('card.ctl_' + k), icon: so ? controlIcon(def, so) : (typeof def.icon === 'string' ? def.icon : 'mdi:gesture-tap') });
+    }
+    if (val('device_controls')) {
+      if (perEntity) { for (const d of deviceControls(hass, item, val('device_controls_order'))) out.push({ id: d.id, label: deviceControlName(d, item), node: () => deviceControlIcon(hass, d) }); }
+      else out.push({ id: 'devices', label: tr('ui.order_devices'), icon: 'mdi:tune-variant' });
+    }
+    const own = (Array.isArray(o && o.buttons) ? o.buttons : Array.isArray(cfg.buttons) ? cfg.buttons : []).filter((b) => b && typeof b === 'object');
+    own.forEach((b, i) => out.push({ id: 'btn:' + i, label: b.name || b.entity || tr('ui.button_n', { n: i + 1 }), icon: b.icon || 'mdi:gesture-tap-button' }));
+    return out;
+  }
 
   // Sender højst hvert 'ms' millisekund, men altid den sidste værdi.
   function makeThrottle(fn, ms) {
@@ -2492,6 +2806,7 @@
     const custom = chips ? [] : ownButtonList(ctx, item);
     if (!kinds.length && !devs.length && !custom.length) return null;
     const btns = el('div', 'btns');
+    const entries = [];
     // Knapperne må ikke udløse elementets egne handlinger.
     for (const ev of ['pointerdown', 'pointerup', 'click', 'keydown']) btns.addEventListener(ev, (e) => e.stopPropagation());
     const open = ctx.ctl.get(item.key);
@@ -2523,7 +2838,7 @@
           ctx.hass.callService(c[0], c[1], c[2]);
         });
       } else b.addEventListener('click', () => ctx.ctl.toggle(item.key, k, b.closest('.item')));
-      btns.appendChild(b);
+      entries.push({ id: k, node: b });
     }
     for (const d of devs) {
       const b = el('button', 'cb');
@@ -2546,7 +2861,7 @@
           });
         }
       } else b.addEventListener('click', () => ctx.ctl.toggle(item.key, d.id, b.closest('.item')));
-      btns.appendChild(b);
+      entries.push({ id: d.id, node: b });
     }
     custom.forEach((cb, i) => {
       const b = el('button', 'cb custom');
@@ -2570,8 +2885,9 @@
       const tap = oe ? { action: 'curio-panel', entity: oe } : cb.tap_action;
       const bound = bindActions(b, { tap, hold: cb.hold_action, double: cb.double_tap_action }, (a) => { if (b.disabled) return; if (a.action === 'curio-panel') ctx.ctl.toggle(item.key, 'dev:' + a.entity, b.closest('.item')); else ctx.run(b, item, withEntityTarget(a, item, ctx.hass)); }, true);
       if (!bound || (oe && !(oso && usable(oso)))) b.disabled = true;
-      btns.appendChild(b);
+      entries.push({ id: 'btn:' + i, node: b });
     });
+    for (const e of applyButtonOrder(entries, Array.isArray(item.obj.buttons_order) ? item.obj.buttons_order : ctx.buttonsOrder)) btns.appendChild(e.node);
     let panel = null;
     if (open && (devs.some((d) => d.id === open) || custom.some((cb) => { const e = ownEntityOf(cb); return e && 'dev:' + e === open; }) || (kinds.includes(open) && CONTROL_BY_ID[open].kind !== 'action'))) {
       panel = buildPanel(ctx, item, open);
@@ -2591,10 +2907,12 @@
   function buildItem(ctx, item, layout) {
     const { hass, eff, run } = ctx;
     const S = (k) => (ITEM_KEYS.has(k) && item.obj[k] !== undefined ? item.obj[k] : eff[k]);
-    const name = itemName(hass, item);
+    const name = itemName(hass, item, !!S('name_hide_device'));
     const ip = normIconPos(layout, S('icon_position'));
     const col = ip === 'top' || ip === 'top_center' || ip === 'top_right';
     const node = el('div', 'item it-' + layout + (col ? ' it-col' : '') + (ip === 'top_center' ? ' ic-center' : '') + (ip === 'top_right' ? ' ic-right' : '') + (ip === 'right' ? ' ip-right' : '') + (item.active ? ' on' : '') + (item.unavailable ? ' unavail' : '') + (item.missing ? ' missing' : ''));
+    const tal = layout === 'chips' ? 'auto' : S('text_align');
+    if (tal && tal !== 'auto') node.classList.add('tx-' + tal);
     const isz = S('icon_size');
     if (isz && isz !== 'auto' && SCALE[isz]) node.style.setProperty('--is', String(SCALE[isz]));
     const bsz = S('button_size');
@@ -2646,7 +2964,7 @@
         big = el('div', 'bigv');
         const p0 = parts[0];
         // Tal og enhed deles ('18 %' -> '18' + lille '%'), så enheden kan vises mindre og lysere.
-        const m = p0.nodeType === 3 ? /^\s*([-+]?[\d.,]+)\s*(\D.*?)\s*$/.exec(p0.nodeValue) : null;
+        const m = p0.nodeType === 3 ? /^\s*([-+]?\d+(?:[.,]\d+)*)\s*([%°‰µ€$£\p{L}].*?)\s*$/u.exec(p0.nodeValue) : null;
         if (m) { big.appendChild(document.createTextNode(m[1])); big.appendChild(el('span', 'bu', m[2])); } else big.appendChild(p0);
         if (big.textContent.trim().length > 6) big.classList.add('long');
         node.classList.add('has-big');
@@ -2663,6 +2981,8 @@
       txt.appendChild(s);
     }
     if (indicator === 'state_label') txt.appendChild(el('span', 'ind label', fmtState(hass, item)));
+    // En chip uden navn, ikon og anden tekst ville stå tom: den viser tilstanden i stedet.
+    if (layout === 'chips' && !icon && !txt.childNodes.length && item.stateObj && !item.missing) txt.appendChild(el('div', 'nm', fmtState(hass, item)));
     if (txt.childNodes.length) node.appendChild(txt);
 
     const sw = S('show_switch') && item.obj.hide_buttons !== true && (layout === 'list' || layout === 'tiles') && canToggle(item) ? makeSwitch(hass, item, runHere) : null;
@@ -2676,7 +2996,16 @@
           const h = ctx.ctl.height(item.key);
           if (h && layout !== 'grid') node.style.minHeight = h + 'px';
           node.appendChild(ctls.panel);
-        } else node.appendChild(ctls.btns);
+        } else {
+          const bp = layout === 'chips' ? 'auto' : S('buttons_position');
+          if (bp && bp !== 'auto') {
+            // Egen placering: tekst og knapper i en fælles beholder, så rækken kan stå ved siden af eller over/under teksten.
+            const mid = el('div', 'mid p-' + bp);
+            if (bp === 'left' || bp === 'above') { mid.appendChild(ctls.btns); if (txt.parentNode) mid.appendChild(txt); }
+            else { if (txt.parentNode) mid.appendChild(txt); mid.appendChild(ctls.btns); }
+            node.appendChild(mid);
+          } else node.appendChild(ctls.btns);
+        }
       }
     }
     if (sw) node.appendChild(sw);
@@ -2727,8 +3056,16 @@
     :host { display: block; }
     ha-card { padding: 12px; overflow: hidden; }
     ha-card.tr { background: color-mix(in srgb, var(--ha-card-background, var(--card-background-color, #fff)) var(--ca, 100%), transparent); }
-    .title { font-size: var(--ha-card-header-font-size, 16px); font-weight: 500; color: var(--primary-text-color); padding: 0 4px 10px; }
-    .empty { color: var(--secondary-text-color); font-size: 14px; padding: 8px 4px; }
+    .title { font-size: calc(var(--ha-card-header-font-size, 16px) * var(--tz, 1)); font-weight: 500; color: var(--tc, var(--primary-text-color)); padding: 0 4px 10px; }
+    .empty { color: var(--tc, var(--secondary-text-color)); font-size: calc(14px * var(--tz, 1)); padding: 8px 4px; }
+    .title.ta-center, .empty.ta-center { text-align: center; } .title.ta-right, .empty.ta-right { text-align: right; }
+    .title.tst-line { padding-bottom: 4px; margin-bottom: 8px; border-bottom: 1.5px solid color-mix(in srgb, var(--tc, var(--divider-color)) 70%, transparent); }
+    .title.tst-fill { padding: 6px 12px; margin-bottom: 10px; border-radius: 8px; background: color-mix(in srgb, var(--tc, var(--primary-text-color)) 14%, transparent); }
+    .empty.tst-line { border-bottom: 1.5px solid color-mix(in srgb, var(--tc, var(--divider-color)) 70%, transparent); }
+    .empty.tst-fill { padding: 8px 12px; border-radius: 8px; background: color-mix(in srgb, var(--tc, var(--primary-text-color)) 14%, transparent); }
+    .title[data-an="pulse"], .empty[data-an="pulse"] { animation: curio-a-pulse var(--ad, 1.8s) ease-in-out infinite; }
+    .title[data-an="blink"], .empty[data-an="blink"] { animation: curio-a-blink var(--ad, 1.2s) steps(1, end) infinite; }
+    .title[data-an="glow"], .empty[data-an="glow"] { --gc: var(--tc, var(--primary-text-color)); animation: curio-a-glow var(--ad, 2s) ease-in-out infinite; }
     .limitnote { color: var(--secondary-text-color); font-size: 12px; padding: 6px 4px 0; }
     .limitnote strong { font-weight: 600; color: var(--primary-text-color); }
     .wrap { --s: 1; --gap: 8px; --r: calc(12px * var(--s)); --ir: 50%; --minw: 170px; display: flex; flex-wrap: wrap; gap: var(--gap); }
@@ -2771,6 +3108,9 @@
     .it-col.ic-center { align-items: center; text-align: center; } .it-col.ic-center .btns { justify-content: center; }
     .it-col.ic-right { align-items: flex-end; text-align: right; } .it-col.ic-right .btns { justify-content: flex-end; }
     .it-col.ic-center .ind.label { align-self: center; } .it-col.ic-right .ind.label { align-self: flex-end; }
+    .item.tx-left .txt { text-align: left; align-items: flex-start; } .item.tx-left .ind.label { align-self: flex-start; }
+    .item.tx-center .txt { text-align: center; align-items: center; } .item.tx-center .ind.label { align-self: center; }
+    .item.tx-right .txt { text-align: right; align-items: flex-end; } .item.tx-right .ind.label { align-self: flex-end; }
     .it-chips.ip-right { flex-direction: row; padding: 0 calc(5px * var(--s)) 0 calc(12px * var(--s)); }
     .ip-right .btns, .ip-right .sw { order: 2; } .ip-right .icon { order: 3; }
     .bigv { font-size: calc(22px * var(--s)); font-weight: 600; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 0 1 auto; min-width: 0; max-width: 100%;
@@ -2856,7 +3196,15 @@
       color: color-mix(in srgb, var(--ci, var(--cc)) 65%, var(--primary-text-color)); background: color-mix(in srgb, var(--ci, var(--cc)) 22%, transparent); }
     .it-chips .ind.label { margin: 0; align-self: center; }
     .btns { flex: none; display: flex; flex-wrap: nowrap; justify-content: flex-end; gap: calc(6px * var(--s)); cursor: default; }
+    .mid { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: calc(8px * var(--s)); }
+    .it-col .mid { flex: none; width: 100%; }
+    .mid.p-below, .mid.p-above { flex-direction: column; align-items: stretch; gap: calc(6px * var(--s)); }
+    .mid.p-left > .txt, .mid.p-right > .txt { flex: 1 1 auto; width: auto; min-width: 0; }
+    .mid.p-left .btns { justify-content: flex-start; }
     .it-col .btns { margin-top: auto; justify-content: flex-start; align-self: stretch; flex-wrap: wrap; }
+    .mid .btns { margin-top: 0; align-self: auto; }
+    .mid.p-below .btns, .mid.p-above .btns { align-self: stretch; flex-wrap: wrap; justify-content: flex-start; }
+    .mid.p-right .btns { justify-content: flex-end; }
     .cb { font: inherit; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; flex: none; width: calc(32px * var(--bs, var(--s))); height: calc(32px * var(--bs, var(--s)));
       padding: 0; border: none; border-radius: 50%; cursor: pointer; color: var(--primary-text-color); --mdc-icon-size: calc(18px * var(--bs, var(--s)));
       background: color-mix(in srgb, var(--primary-text-color) 10%, transparent); }
@@ -2934,9 +3282,23 @@
     @keyframes curio-a-ringglow { 0%, 100% { box-shadow: 0 0 0 2px var(--ic, var(--cc)); } 50% { box-shadow: 0 0 0 2px var(--ic, var(--cc)), 0 0 12px 3px var(--ic, var(--cc)); } }
     @media (prefers-reduced-motion: reduce) {
       .item[data-an-all]::before, .item[data-an-icon] .icon, .item[data-an-icon] .icon > *, .item[data-an-ind] .ind, .item[data-an-ind] .icon.ring { animation: none !important; }
+      .title[data-an], .empty[data-an] { animation: none !important; }
       .item, .sw, .sw .knob { transition: none; } .panel, .panel.fresh { animation: none; } .cb.pressed { transition: none; } .mq { display: inline; } .mq.roll { animation: none; }
     }
   `;
+
+  // Størrelse, farve, placering, stil og animation for titlen og teksten når tom (pre = 'title' | 'empty')
+  function textStyle(node, eff, pre) {
+    const sz = eff[pre + '_size'], col = eff[pre + '_color'], al = eff[pre + '_align'], st = eff[pre + '_style'], an = eff[pre + '_animation'];
+    node.className = pre + (al === 'center' ? ' ta-center' : al === 'right' ? ' ta-right' : '') + (st === 'line' ? ' tst-line' : st === 'fill' ? ' tst-fill' : '');
+    if (sz && sz !== 'm' && SCALE[sz]) node.style.setProperty('--tz', String(SCALE[sz])); else node.style.removeProperty('--tz');
+    const c = col ? resolveColor(col) : '';
+    if (c) node.style.setProperty('--tc', c); else node.style.removeProperty('--tc');
+    if (ANIM_SECONDS[an] && TEXT_ANIMS.includes(an)) {
+      node.dataset.an = an;
+      node.style.setProperty('--ad', ANIM_SECONDS[an][eff[pre + '_speed'] === 'slow' ? 0 : eff[pre + '_speed'] === 'fast' ? 2 : 1] + 's');
+    } else { delete node.dataset.an; node.style.removeProperty('--ad'); }
+  }
 
   class CurioCard extends HTMLElement {
     constructor() {
@@ -2980,6 +3342,15 @@
       this._eff = effective(config);
       this._engine = createFilterEngine(config.filter);
       this._colorRules = createColorRules(config.color_rules);
+      // Entiteter, som betingelser i regler peger på, følges også (selv når de er skjult).
+      const refs = ruleRefs(config.color_rules);
+      this._colorRefs = [...refs];
+      ruleRefs(config.group_rules, refs);
+      if (config.filter && typeof config.filter === 'object') { ruleRefs(config.filter.include, refs); ruleRefs(config.filter.exclude, refs); ruleRefs(config.filter.only_if, refs); }
+      if (Array.isArray(config.entities)) for (const r of config.entities) if (r && typeof r === 'object') ruleRefs(r.color_rules, refs);
+      this._refs = [...refs];
+      this._patterns = this._refs.filter(hasWild);
+      this._patKey = '';
       this._cache.clear();
       this._render();
     }
@@ -2990,7 +3361,8 @@
       this._hass = hass;
       if (!this._config) return;
       const dirty = this._engine ? this._engine.update(hass) : false;
-      if (prev && prev.language === hass.language && !dirty && this._watch.every((id) => prev.states[id] === hass.states[id])) return;
+      const patChanged = this._patterns && this._patterns.length && resolveTargets(this._patterns, hass).join('|') !== this._patKey;
+      if (prev && prev.language === hass.language && !dirty && !patChanged && this._watch.every((id) => prev.states[id] === hass.states[id])) return;
       this._render();
     }
     get hass() { return this._hass; }
@@ -3047,6 +3419,7 @@
       const layout = eff.layout;
       this._title.textContent = eff.title || '';
       this._title.style.display = eff.title ? '' : 'none';
+      textStyle(this._title, eff, 'title');
 
       const w = this._wrap;
       const cols = layout === 'tiles' || layout === 'grid' ? Math.round(eff.columns) : 0;
@@ -3079,8 +3452,13 @@
       // Entiteter, som egne knapper viser styring for, følges også (knappen blokeres, når de er utilgængelige).
       const lists = [cfg.buttons, ...(Array.isArray(cfg.entities) ? cfg.entities : []).map((r) => r && typeof r === 'object' && r.buttons)];
       for (const l of lists) if (Array.isArray(l)) for (const b of l) { const e = ownEntityOf(b); if (e && !this._watch.includes(e)) this._watch.push(e); }
+      if (this._refs && this._refs.length) {
+        const have = new Set(this._watch);
+        for (const e of resolveTargets(this._refs, hass)) if (!have.has(e)) { have.add(e); this._watch.push(e); }
+        this._patKey = this._patterns.length ? resolveTargets(this._patterns, hass).join('|') : '';
+      }
       const ctx = {
-        hass, eff, buttons: cfg.buttons, colorRules: this._colorRules,
+        hass, eff, buttons: cfg.buttons, buttonsOrder: cfg.buttons_order, colorRules: this._colorRules,
         toggleGroup: (gkey) => { if (this._folded.has(gkey)) this._folded.delete(gkey); else this._folded.add(gkey); this._render(); },
         run: (node, item, a) => runAction(node, this._hass, item, a),
         ctl: {
@@ -3126,7 +3504,9 @@
         if (item.kind !== 'entity') return renderSection(item, ctx);
         const hit = this._cache.get(item.key);
         // Egne knapper, der viser en anden entitets styring, afhænger også af den entitets tilstand.
-        const deps = layout === 'chips' ? [] : ownButtonList(ctx, item).map(ownEntityOf).filter(Boolean).map((e) => hass.states[e]);
+        // Farveregler kan også pege på andre entiteter; elementet gentegnes, når de ændres.
+        const rids = resolveTargets([...(this._colorRefs || []), ...(item.obj && Array.isArray(item.obj.color_rules) ? ruleRefs(item.obj.color_rules) : [])], hass);
+        const deps = (layout === 'chips' ? [] : ownButtonList(ctx, item).map(ownEntityOf).filter(Boolean)).concat(rids).map((e) => hass.states[e]);
         const sameDeps = hit && (hit.deps || []).length === deps.length && deps.every((d, i) => d === hit.deps[i]);
         if (hit && ((hit.stateObj === item.stateObj && sameDeps) || this._busy === item.key)) return hit.node;
         const node = render(ctx, item);
@@ -3161,6 +3541,7 @@
       const none = this._ids.length === 0;
       this._empty.style.display = none && hass ? '' : 'none';
       this._empty.textContent = eff.empty_text || tr('card.empty');
+      textStyle(this._empty, eff, 'empty');
       w.style.display = none ? 'none' : '';
 
       // Kortets egen stil: gennemsigtighed, ramme, skygge og hjørner (tema er standard).
@@ -3493,9 +3874,10 @@
           body.append(form, this._gwrap, formB);
         } else if (sec.id === 'buttons') {
           this._bbody = el('div', 'frules');
+          this._bord = el('div', 'frules ordbox');
           this._bintro = el('div', 'note sep', tr('ui.buttons_intro'));
           this._cwrap = el('div', 'ctlgrp');
-          body.append(this._cwrap, form, this._bintro, this._bbody);
+          body.append(this._cwrap, form, this._bintro, this._bbody, this._bord);
         } else if (sec.id === 'interaction') {
           this._curA = this._curBlock(['tap_action', 'hold_action', 'double_tap_action', 'icon_tap_action', 'icon_hold_action', 'icon_double_tap_action'].map((k) => ({
             label: tr('label.' + k),
@@ -3590,10 +3972,11 @@
         } else form.schema = schema;
         if (sec.id === 'filter') { panel.style.display = inAE ? 'none' : ''; this._renderFilter(eff); }
         else if (sec.id === 'colors') { panel.style.display = ''; this._renderColors(); }
-        else if (sec.id === 'buttons') { panel.style.display = ''; this._bintro.style.display = this._bbody.style.display = layout === 'chips' ? 'none' : ''; this._renderButtons(); }
+        else if (sec.id === 'buttons') { panel.style.display = ''; this._bintro.style.display = this._bbody.style.display = layout === 'chips' ? 'none' : ''; this._renderButtons(); this._renderOrder(layout); }
         else if (sec.id !== 'entities') panel.style.display = schema.length ? '' : 'none';
       }
       if (this._curA) this._curA.update();
+      if (this._ordFns) this._ordFns.forEach((fn) => { try { fn(); } catch (e) { /* panelet er lukket */ } });
       this._renderChanged(eff);
     }
 
@@ -3843,7 +4226,16 @@
       return conds.map((c) => {
         const f = c.field === 'attribute' && c.attribute ? c.attribute : tr('o.field.' + c.field);
         const v = c.value === undefined || c.value === null ? '' : String(c.value);
-        return (f + ' ' + tr('o.operator.' + c.operator) + (v ? ' ' + v : '')).trim();
+        const tg = condTargets(c);
+        let who = '';
+        if (tg.length) {
+          const st = this._hass && this._hass.states;
+          const names = tg.map((t) => { const so = st && st[t]; return (so && so.attributes && so.attributes.friendly_name) || t; }).join(', ');
+          const md = condMode(c);
+          const many = tg.length > 1 || hasWild(tg[0]);
+          who = (md === 'any' ? (many ? tr('ui.match_any_of') + ' ' : '') : tr('ui.match_' + md + '_of') + ' ') + names + ': ';
+        }
+        return (who + f + ' ' + tr('o.operator.' + c.operator) + (v ? ' ' + v : '')).trim();
       }).join(' ' + tr('ui.and') + ' ');
     }
 
@@ -3860,6 +4252,7 @@
       };
       const render = () => {
         for (const k of [...this._forms.keys()]) if (k.indexOf(o.prefix + ':') === 0) this._forms.delete(k);
+        this._hold(host);
         host.replaceChildren();
         const list = o.get();
         lastKey = JSON.stringify(list);
@@ -3881,7 +4274,7 @@
             b.title = tr('ui.dup_rule');
             return b;
           };
-          if (G) {
+          {
             const tools = el('span', 'rtools');
             for (const [dir, label, key] of [[-1, '↑', 'ui.move_up'], [1, '↓', 'ui.move_down']]) {
               const b = mkBtn(label, () => {
@@ -3897,29 +4290,36 @@
             }
             tools.append(clipB(), dupBtn(), rm);
             head.append(title, tools);
-          } else head.append(title, clipB(), dupBtn(), rm);
+          }
           rb.appendChild(head);
           conds.forEach((cond, ci) => {
             if (ci) rb.appendChild(el('div', 'and', tr('ui.and')));
             const row = el('div', 'cond');
             const form = document.createElement('ha-form');
             form.computeLabel = (sch) => tr('label.c_' + sch.name);
+            form.computeHelper = (sch) => (['target', 'entities', 'pattern', 'match'].includes(sch.name) ? tr('help.c_' + sch.name) : '');
             form.hass = this._hass;
-            form.schema = this._condSchema(cond);
-            form.data = { field: cond.field, operator: cond.operator, attribute: cond.attribute || '', value: cond.value === undefined ? '' : cond.value };
+            const ckey = o.prefix + ':' + ri + ':' + ci;
+            const cmode = this._condMode(cond, ckey);
+            form.schema = this._condSchema(cond, cmode);
+            form.data = this._condData(cond, cmode, ckey);
             form.addEventListener('value-changed', (e) => {
               e.stopPropagation();
               const v = e.detail.value || {};
               form.data = v;
               const cur = o.get();
               const old = cur[ri].conditions[ci];
-              const next = { field: v.field || old.field, operator: v.operator || old.operator, value: v.value === undefined || v.value === null ? '' : v.value };
-              const nf = FIELD_BY_ID[next.field];
-              if (OPERATOR_BY_ID[next.operator] && OPERATOR_BY_ID[next.operator].numeric && !(nf && nf.numeric)) next.operator = 'is';
-              if (next.field === 'attribute') next.attribute = v.attribute || '';
-              const structural = next.field !== old.field || next.operator !== old.operator;
+              const pm = this._condMode(old, ckey);
+              const next = this._condNext(v, old, ckey);
+              // Kun felt og sammenligning ændrer formens opbygning; entiteter, mønster og antal opdateres uden at genopbygge (ellers mister feltet markøren, og editoren hopper)
+              // Ændringer i betingelsen opdaterer kun den ene form og rækkens resumé på stedet; listen bygges ikke om (ellers hopper editoren)
+              const nm = this._condMode(next, ckey);
+              const shape = next.field !== old.field || next.operator !== old.operator || nm !== pm;
+              if (shape) { form.schema = this._condSchema(next, nm); form.data = this._condData(next, nm, ckey); }
               const conds2 = cur[ri].conditions.slice(); conds2[ci] = next;
-              commit(cur.map((r, i) => (i === ri ? { ...r, conditions: conds2 } : r)), structural);
+              const rule2 = { ...cur[ri], conditions: conds2 };
+              if (shape || condEntity(next) !== condEntity(old) || next.match !== old.match) this._sumUpdate(form, [this._condText(rule2), !G && rule2.animation ? tr('o.animation.' + rule2.animation) : ''].filter(Boolean).join(' · '));
+              commit(cur.map((r, i) => (i === ri ? rule2 : r)), false);
             });
             this._forms.set(o.prefix + ':' + ri + ':' + ci, form);
             const crm = mkBtn('✕', () => {
@@ -3929,6 +4329,7 @@
               commit(left.length ? cur.map((r, i) => (i === ri ? { ...r, conditions: left } : r)) : cur.filter((_, i) => i !== ri), true);
             }, 'rm');
             crm.title = tr('ui.remove_condition');
+            crm.addEventListener('click', () => { if (this._condModes) this._condModes.clear(); });
             row.append(form, crm);
             rb.appendChild(row);
           });
@@ -3940,16 +4341,17 @@
           rf.computeLabel = (sch) => tr('label.r_' + sch.name);
           rf.hass = this._hass;
           const selOpts = (list, key) => ({ select: { mode: 'dropdown', options: list.map((x) => ({ value: x, label: tr('o.' + key + '.' + x) })) } });
+          const rfSchema = (r) => [
+            { name: 'color', selector: { ui_color: { include_state: false } } },
+            { name: 'animation', selector: selOpts(['none', ...ANIMATIONS], 'animation') },
+            ...(r.animation ? [{ name: 'speed', selector: selOpts(['slow', 'normal', 'fast'], 'speed') }] : []),
+            { name: 'affects', selector: selOpts(['all', 'icon', 'indicator'], 'affects') }
+          ];
           if (G) {
             rf.schema = [{ name: 'name', selector: { text: {} } }, { name: 'color', selector: { ui_color: { include_state: false } } }];
             rf.data = { name: rule.name || '', color: rule.color || '' };
           } else {
-            rf.schema = [
-              { name: 'color', selector: { ui_color: { include_state: false } } },
-              { name: 'animation', selector: selOpts(['none', ...ANIMATIONS], 'animation') },
-              ...(rule.animation ? [{ name: 'speed', selector: selOpts(['slow', 'normal', 'fast'], 'speed') }] : []),
-              { name: 'affects', selector: selOpts(['all', 'icon', 'indicator'], 'affects') }
-            ];
+            rf.schema = rfSchema(rule);
             rf.data = { color: rule.color || '', animation: rule.animation || 'none', speed: rule.speed || 'normal', affects: rule.affects || 'all' };
           }
           rf.addEventListener('value-changed', (e) => {
@@ -3968,8 +4370,13 @@
             if (v.affects && v.affects !== 'all') next.affects = v.affects; else delete next.affects;
             if (v.animation && v.animation !== 'none') next.animation = v.animation; else { delete next.animation; delete next.speed; }
             if (next.animation && v.speed && v.speed !== 'normal') next.speed = v.speed; else delete next.speed;
-            // Hastighedsfeltet vises kun med en animation, så skemaet skal bygges om, når det skifter
-            commit(cur.map((r, i) => (i === ri ? next : r)), (cur[ri].animation || 'none') !== (next.animation || 'none'));
+            // Hastighedsfeltet vises kun med en animation: kun denne form får nyt skema (på stedet), listen bygges ikke om
+            if ((cur[ri].animation || 'none') !== (next.animation || 'none')) {
+              rf.schema = rfSchema(next);
+              rf.data = { color: next.color || '', animation: next.animation || 'none', speed: next.speed || 'normal', affects: next.affects || 'all' };
+              this._sumUpdate(rf, [this._condText(next), next.animation ? tr('o.animation.' + next.animation) : ''].filter(Boolean).join(' · '));
+            }
+            commit(cur.map((r, i) => (i === ri ? next : r)), false);
           });
           this._forms.set(o.prefix + ':' + ri + ':r', rf);
           rb.appendChild(rf);
@@ -3991,10 +4398,77 @@
       this._buttonList(this._bbody, { prefix: 'b', get: () => this._buttonsCfg(), set: (list, structural) => this._setButtons(list, structural) }).render();
     }
 
+    // Liste over knapperne med ↑ og ↓: o.items() giver knapperne, o.get() den gemte rækkefølge (eller undefined), o.set(liste|undefined) gemmer den.
+    _orderList(box, o) {
+      const state = () => {
+        const cur = o.get();
+        const items = applyButtonOrder(o.items(), Array.isArray(cur) ? cur : []);
+        return { items, key: JSON.stringify([items.map((x) => x.id), cur, !!(o.isSet && o.isSet())]) };
+      };
+      let last = null;
+      const render = () => {
+        const st = state();
+        last = st.key;
+        this._hold(box);
+        box.replaceChildren();
+        box.style.display = st.items.length < 2 ? 'none' : '';
+        if (st.items.length < 2) return;
+        box.appendChild(el('h4', '', tr('ui.order_title')));
+        box.appendChild(el('div', 'note', tr('ui.order_hint')));
+        st.items.forEach((it, i) => {
+          const row = el('div', 'mrow');
+          row.dataset.order = it.id;
+          if (it.node) row.appendChild(it.node()); else { const ic = document.createElement('ha-icon'); ic.setAttribute('icon', it.icon || 'mdi:gesture-tap'); row.appendChild(ic); }
+          row.appendChild(el('span', 'mlabel', it.label));
+          for (const [dir, label, k] of [[-1, '↑', 'ui.move_up'], [1, '↓', 'ui.move_down']]) {
+            const b = el('button', 'move', label);
+            b.type = 'button'; b.title = tr(k);
+            b.disabled = i + dir < 0 || i + dir >= st.items.length;
+            b.addEventListener('click', () => {
+              const ids = state().items.map((x) => x.id);
+              [ids[i], ids[i + dir]] = [ids[i + dir], ids[i]];
+              o.set(ids);
+              render();
+            });
+            row.appendChild(b);
+          }
+          box.appendChild(row);
+        });
+        if (o.isSet ? o.isSet() : Array.isArray(o.get())) {
+          const rs = el('button', 'add', tr(o.resetLabel || 'ui.order_reset'));
+          rs.type = 'button';
+          rs.addEventListener('click', () => { o.set(undefined); render(); });
+          box.appendChild(rs);
+        }
+      };
+      return { render, refresh: () => { if (state().key !== last) render(); } };
+    }
+
+    _setButtonsOrder(list) {
+      const cfg = { ...this._config };
+      if (Array.isArray(list) && list.length) cfg.buttons_order = list; else delete cfg.buttons_order;
+      this._config = cfg;
+      fire(this, 'config-changed', { config: cfg });
+    }
+
+    _renderOrder(layout) {
+      if (!this._bord) return;
+      if (layout === 'chips') { this._bord.style.display = 'none'; return; }
+      if (!this._ordCard) {
+        this._ordCard = this._orderList(this._bord, {
+          items: () => buttonOrderItems(this._hass, '', {}, this._config, false),
+          get: () => this._config.buttons_order,
+          set: (l) => this._setButtonsOrder(l)
+        });
+        this._ordCard.render();
+      } else this._ordCard.refresh();
+    }
+
     // Byggeklods til egne knapper: bruges både til kortets knapper og til knapperne på én entitet.
     _buttonList(box, o) {
       const render = () => {
         for (const k of [...this._forms.keys()]) if (k.indexOf(o.prefix + ':') === 0) this._forms.delete(k);
+        this._hold(box);
         box.replaceChildren();
         const list = o.get();
         list.forEach((b, i) => {
@@ -4088,16 +4562,82 @@
       this._refresh();
     }
 
-    _condSchema(cond) {
+    // Del af nøglen, der afgør, om en regelliste skal bygges om: de valg i betingelserne, som endnu ikke står i konfigurationen.
+
+    // Når en liste bygges om, holder den sin højde et øjeblik, så editoren ikke hopper, mens felterne tegner sig (ha-form tegner asynkront).
+    _hold(box) {
+      if (!box || !box.isConnected) return;
+      const h = box.offsetHeight;
+      if (!h) return;
+      box.style.minHeight = h + 'px';
+      clearTimeout(box._holdT);
+      box._holdT = setTimeout(() => { box.style.minHeight = ''; }, 450);
+    }
+
+    // Opdaterer resuméet i en foldet regelrække uden at bygge listen om.
+    _sumUpdate(form, text) {
+      const rb = form.closest ? form.closest('.rule') : null;
+      const sum = rb && rb.querySelector('.rsum');
+      if (!sum) return;
+      const t = [...sum.childNodes].find((n) => n.nodeType === 3);
+      if (t) t.nodeValue = text; else if (text) sum.appendChild(document.createTextNode(text));
+    }
+
+    // Hvad betingelsen måler på: 'self', 'list' (bestemte entiteter) eller 'pattern'. Et valg uden entiteter endnu huskes i editoren.
+    _condMode(cond, key) {
+      const e = condEntity(cond);
+      const t = this._condModes && this._condModes.get(key);
+      if (!e) return (t && t.mode) || 'self';
+      // Valget huskes, mens man skriver: 'm' er endnu ikke et mønster, men feltet skal blive ved med at være Mønster
+      if (t && (t.mode === 'pattern' || !hasWild(e))) return t.mode;
+      return hasWild(e) ? 'pattern' : 'list';
+    }
+
+    // Formens data for en betingelse.
+    _condData(cond, mode, key) {
+      const e = condEntity(cond);
+      const t = this._condModes && this._condModes.get(key);
+      return { target: mode, entities: mode === 'list' ? targetsOf(e) : [], pattern: mode === 'pattern' ? e : '', match: e ? condMode(cond) : (t && t.match) || 'any', field: cond.field, operator: cond.operator, attribute: cond.attribute || '', value: cond.value === undefined ? '' : cond.value };
+    }
+
+    // Ny betingelse ud fra formens værdier. 'entity' og 'match' gemmes kun, når betingelsen måler på andre entiteter.
+    _condNext(v, old, key) {
+      if (!this._condModes) this._condModes = new Map();
+      const prev = this._condMode(old, key);
+      const mode = v.target || prev;
+      let ent = '';
+      if (mode === prev) {
+        if (mode === 'list') ent = (Array.isArray(v.entities) ? v.entities : []).filter(Boolean).join(', ');
+        else if (mode === 'pattern') ent = typeof v.pattern === 'string' ? v.pattern.trim() : '';
+      }
+      const md = v.match === 'all' || v.match === 'none' ? v.match : 'any';
+      if (mode === 'self') this._condModes.delete(key); else this._condModes.set(key, { mode, match: md });
+      const next = {};
+      if (ent) next.entity = ent;
+      if (ent && md !== 'any') next.match = md;
+      next.field = v.field || old.field;
+      next.operator = v.operator || old.operator;
+      next.value = v.value === undefined || v.value === null ? '' : v.value;
+      const nf = FIELD_BY_ID[next.field];
+      if (OPERATOR_BY_ID[next.operator] && OPERATOR_BY_ID[next.operator].numeric && !(nf && nf.numeric)) next.operator = 'is';
+      if (next.field === 'attribute') next.attribute = v.attribute || '';
+      return next;
+    }
+
+    _condSchema(cond, mode) {
       const h = this._hass || {};
       const fields = FIELDS.filter((f) => !f.needs || h[f.needs] || f.id === cond.field);
       const fdef = FIELD_BY_ID[cond.field];
       const ops = OPERATORS.filter((o) => !o.numeric || (fdef && fdef.numeric));
       const sel = (list, key) => ({ select: { mode: 'dropdown', options: list.map((x) => ({ value: x.id, label: tr('o.' + key + '.' + x.id) })) } });
-      const out = [{ type: 'grid', name: '', schema: [{ name: 'field', selector: sel(fields, 'field') }, { name: 'operator', selector: sel(ops, 'operator') }] }];
+      const out = [{ name: 'target', selector: { select: { mode: 'dropdown', options: ['self', 'list', 'pattern'].map((x) => ({ value: x, label: tr('o.target.' + x) })) } } }];
+      if (mode === 'list') out.push({ name: 'entities', selector: { entity: { multiple: true } } });
+      if (mode === 'pattern') out.push({ name: 'pattern', selector: { text: {} } });
+      if (mode !== 'self') out.push({ name: 'match', selector: { select: { mode: 'dropdown', options: ['any', 'all', 'none'].map((x) => ({ value: x, label: tr('o.match.' + x) })) } } });
+      out.push({ type: 'grid', name: '', schema: [{ name: 'field', selector: sel(fields, 'field') }, { name: 'operator', selector: sel(ops, 'operator') }] });
       if (cond.field === 'attribute') out.push({ name: 'attribute', selector: { text: {} } });
       let valueSel = { text: {} };
-      if (cond.operator !== 'in') {
+      if (cond.operator !== 'in' && cond.operator !== 'not_in') {
         let names = [];
         if (cond.field === 'domain' && h.states) names = [...new Set(Object.keys(h.states).map((i) => i.split('.')[0]))].sort();
         else if (cond.field === 'area' && h.areas) names = Object.values(h.areas).map((a) => a.name).filter(Boolean).sort();
@@ -4114,6 +4654,7 @@
       this._fKey = key;
       for (const k of [...this._forms.keys()]) if (k.indexOf('f:') === 0) this._forms.delete(k);
       const box = this._fbody;
+      this._hold(box);
       box.replaceChildren();
       const f = this._filterCfg();
       const mkBtn = (text, fn, cls) => { const b = el('button', cls || '', text); b.type = 'button'; b.addEventListener('click', fn); return b; };
@@ -4146,23 +4687,28 @@
             const row = el('div', 'cond');
             const form = document.createElement('ha-form');
             form.computeLabel = (sch) => tr('label.c_' + sch.name);
+            form.computeHelper = (sch) => (['target', 'entities', 'pattern', 'match'].includes(sch.name) ? tr('help.c_' + sch.name) : '');
             form.hass = this._hass;
-            form.schema = this._condSchema(cond);
-            form.data = { field: cond.field, operator: cond.operator, attribute: cond.attribute || '', value: cond.value === undefined ? '' : cond.value };
+            const ckey = 'f:' + mode + ':' + ri + ':' + ci;
+            const cmode = this._condMode(cond, ckey);
+            form.schema = this._condSchema(cond, cmode);
+            form.data = this._condData(cond, cmode, ckey);
             form.addEventListener('value-changed', (e) => {
               e.stopPropagation();
               const v = e.detail.value || {};
               form.data = v; // ha-form opdaterer ikke selv sin data
               const g = this._filterCfg();
               const old = g[mode][ri].conditions[ci];
-              const next = { field: v.field || old.field, operator: v.operator || old.operator, value: v.value === undefined || v.value === null ? '' : v.value };
-              const nf = FIELD_BY_ID[next.field];
-              if (OPERATOR_BY_ID[next.operator] && OPERATOR_BY_ID[next.operator].numeric && !(nf && nf.numeric)) next.operator = 'is';
-              if (next.field === 'attribute') next.attribute = v.attribute || '';
-              const structural = next.field !== old.field || next.operator !== old.operator;
+              const pm = this._condMode(old, ckey);
+              const next = this._condNext(v, old, ckey);
+              // Ændringer i betingelsen opdaterer kun den ene form og rækkens resumé på stedet; listen bygges ikke om (ellers hopper editoren)
+              const nm = this._condMode(next, ckey);
+              const shape = next.field !== old.field || next.operator !== old.operator || nm !== pm;
+              if (shape) { form.schema = this._condSchema(next, nm); form.data = this._condData(next, nm, ckey); }
               const conds2 = g[mode][ri].conditions.slice(); conds2[ci] = next;
               g[mode] = g[mode].map((r, i) => (i === ri ? { ...r, conditions: conds2 } : r));
-              this._setFilter(g, structural);
+              if (shape || condEntity(next) !== condEntity(old) || next.match !== old.match) this._sumUpdate(form, this._condText(g[mode][ri]));
+              this._setFilter(g, false);
             });
             this._forms.set('f:' + mode + ':' + ri + ':' + ci, form);
             const rm = mkBtn('✕', () => {
@@ -4173,6 +4719,7 @@
               this._setFilter(g, true);
             }, 'rm');
             rm.title = tr('ui.remove_condition');
+            rm.addEventListener('click', () => { if (this._condModes) this._condModes.clear(); });
             row.append(form, rm);
             rb.appendChild(row);
           });
@@ -4317,6 +4864,7 @@
       this._ovrKey = key;
       for (const k of [...this._forms.keys()]) if (k.indexOf('ovr:') === 0 || k.indexOf('ovrcr:') === 0 || k.indexOf('mk:') === 0 || k.indexOf('io:') === 0 || k.indexOf('ib:') === 0 || k.indexOf('ibu:') === 0 || k.indexOf('cp:') === 0) this._forms.delete(k);
       this._ovr.replaceChildren();
+      if (this._ordFns) this._ordFns.clear();
       this._ovrPanels.clear();
       this._ovrSum.clear();
       if (!rows.length) return;
@@ -4443,12 +4991,27 @@
               e.stopPropagation();
               const use = !!(e.detail.value || {}).use;
               form.data = { use };
+              const had = Array.isArray(this._entityObj(uid).buttons) ? this._entityObj(uid).buttons : [];
+              if (!this._btnUndo) this._btnUndo = new Map();
+              if (use && had.length) this._btnUndo.set(uid, JSON.parse(JSON.stringify(had))); else this._btnUndo.delete(uid);
               this._patchEntity(uid, (o) => { if (use) delete o.buttons; else o.buttons = []; });
               renderTop();
               bl.render();
             });
             this._forms.set('ibu:' + uid, form);
             top.appendChild(form);
+            const saved = this._btnUndo && this._btnUndo.get(uid);
+            if (!hasOwn() && saved && saved.length) {
+              const un = el('button', 'add undo', tr('ui.item_undo_buttons', { n: saved.length }));
+              un.type = 'button';
+              un.addEventListener('click', () => {
+                this._btnUndo.delete(uid);
+                this._patchEntity(uid, (o) => { o.buttons = saved; });
+                renderTop();
+                bl.render();
+              });
+              top.appendChild(un);
+            }
             if (hasOwn() && this._buttonsCfg().length) {
               const cp = el('button', 'add', '+ ' + tr('ui.item_copy_card_buttons'));
               cp.type = 'button';
@@ -4471,6 +5034,17 @@
           });
           renderTop();
           bl.render();
+          const obox = el('div', 'frules ordbox');
+          body.appendChild(obox);
+          const ol = this._orderList(obox, {
+            items: () => buttonOrderItems(this._hass, uid, this._entityObj(uid), this._config, true),
+            get: () => { const o = this._entityObj(uid); return Array.isArray(o.buttons_order) ? o.buttons_order : this._config.buttons_order; },
+            isSet: () => Array.isArray(this._entityObj(uid).buttons_order),
+            resetLabel: 'ui.order_reset_item',
+            set: (l) => this._patchEntity(uid, (o) => { if (Array.isArray(l) && l.length) o.buttons_order = l; else delete o.buttons_order; })
+          });
+          ol.render();
+          (this._ordFns || (this._ordFns = new Map())).set(uid, ol.refresh);
         }
         this._copySection(body, uid);
         this._ovr.appendChild(p);

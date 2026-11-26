@@ -11,11 +11,24 @@ Defaults marked with a layout in brackets depend on the layout. **Per entity** m
 | `layout` | Layout | `tiles` |  |
 | `align` | Alignment | `stretch` (`start` in chips) |  |
 | `icon_position` | Icon position | `left` (`top` in grid) |  |
+| `text_align` | Text alignment | `auto` | yes |
 | `columns` | Columns | 0 (automatic) |  |
 | `item_width` | Item width | 0 (automatic) |  |
 | `gap` | Gap | 8 (6 in chips, 4 in list) |  |
 | `title` | Title | empty |  |
+| `title_size` | Title size | `m` |  |
+| `title_color` | Title colour | empty |  |
+| `title_align` | Title placement | `left` |  |
+| `title_style` | Title style | `plain` |  |
+| `title_animation` | Title animation | `none` |  |
+| `title_speed` | Title animation speed | `normal` |  |
 | `empty_text` | Text when empty | empty |  |
+| `empty_size` | Empty text size | `m` |  |
+| `empty_color` | Empty text colour | empty |  |
+| `empty_align` | Empty text placement | `left` |  |
+| `empty_style` | Empty text style | `plain` |  |
+| `empty_animation` | Empty text animation | `none` |  |
+| `empty_speed` | Empty text animation speed | `normal` |  |
 
 ## Grouping
 
@@ -43,9 +56,10 @@ Defaults marked with a layout in brackets depend on the layout. **Per entity** m
 | `show_icon` | Show icon | `true` | yes |
 | `icon_size` | Icon size | `auto` |  |
 | `show_name` | Show name | `true` | yes |
+| `name_hide_device` | Hide the device name | `false` | yes |
 | `long_text` | Long text | `scroll` |  |
 | `secondary_info` | Secondary information | `state` (none in chips) | yes |
-| `big_value` | Big value | `false` |  |
+| `big_value` | Big value | `false` | yes |
 | `secondary_attribute` | Attribute name | empty | yes |
 | `card_plain` | No card style | `false` |  |
 | `card_opacity` | Card opacity | 100 |  |
@@ -76,6 +90,7 @@ Defaults marked with a layout in brackets depend on the layout. **Per entity** m
 | `device_controls_order` | The device's own controls: order | `buttons` | yes |
 | `button_press_feedback` | Device buttons: light up when pressed | `true` | yes |
 | `button_size` | Button size | `auto` |  |
+| `buttons_position` | Button placement | `auto` | yes |
 | `button_color` | Button colour | empty |  |
 | `controls_autoclose` | Close control automatically after (sec.) | 0 (off) |  |
 
@@ -117,7 +132,8 @@ These are edited in their own place in the editor, not in the sections above.
 | `color_rules` | Colour and animation rules | Colours and animation |
 | `group_rules` | Your own groups, with `name`, `color` and `conditions` | Grouping (Custom groups) |
 | `buttons` | Your own buttons | Buttons |
+| `buttons_order` | The order of the buttons, as a list of names (see [Controls and buttons](controls-and-buttons.md#where-the-buttons-sit-and-in-what-order)) | Buttons (Order of the buttons) |
 
 A button can carry `icon`, `name`, `color`, `tap_action`, `hold_action`, `double_tap_action` and `entity` (shows the control of a `select`, `input_select`, `number` or `input_number`; then `tap_action` is not used).
 
-An entity written as an object can also carry `name`, `icon`, `color_rules`, `buttons`, `hide_buttons` and any setting marked *Per entity* above.
+An entity written as an object can also carry `name`, `icon`, `color_rules`, `buttons`, `buttons_order`, `hide_buttons` and any setting marked *Per entity* above.

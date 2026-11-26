@@ -47,6 +47,7 @@ Choose the controls you want under **Controls**. The list is grouped by type (Li
 | **The device's own controls: order** | Which of them come first when there are more than four: *Buttons first* (default) or *Choices and numbers first*. Only shown when the setting above is on |
 | **Device buttons: light up when pressed** | The device's own buttons light up for about a second and a half after a press (default: on). Only shown when the device's own controls are on |
 | **Button size** | Automatic (follows the size of the item), S, M, L or XL. The slider gets the same height as the buttons |
+| **Button placement** | Where the row of buttons sits in the item: Automatic, To the right of the text, To the left of the text, Below the text or Above the text. Not available in chips (see [below](#where-the-buttons-sit-and-in-what-order)) |
 | **Button colour** | One colour for all buttons (icon and a faint background). Empty is neutral. An own button can have its own colour |
 | **Close control automatically after (sec.)** | A slider closes by itself after this many seconds without touch. 0 means it only closes with ✕ |
 
@@ -86,7 +87,7 @@ If a button does not show up, check in Home Assistant that it belongs to the sam
 
 ## Your own buttons
 
-Your own buttons are round icon buttons that can run any [action](actions.md). They sit to the right of the item's text (in the grid, below it).
+Your own buttons are round icon buttons that can run any [action](actions.md). By default they sit to the right of the item's text, or below it when the icon is on top. **Button placement** can move them (see [below](#where-the-buttons-sit-and-in-what-order)).
 
 1. Open **Buttons** and choose **Add button**.
 2. Pick an **Icon**, and fill in **Tooltip** if you like (shown when you hover with a mouse), and a **Colour**.
@@ -144,6 +145,61 @@ buttons:
 | Icon | `mdi:lightbulb-off` |
 | Tap | Perform action: `light.turn_off`, target area `living_room` |
 
+## Where the buttons sit, and in what order
+
+**Button placement** moves the whole row of buttons, which means the card's controls, the device's own controls and your own buttons together. It is in the **Buttons** section and works in tiles, list and grid.
+
+| Choice | Where the buttons sit |
+|---|---|
+| **Automatic** | To the right of the text, and below the text when the icon is on top. This is the default |
+| **To the right of the text** | In the same row as the text, at the end |
+| **To the left of the text** | Between the icon and the text |
+| **Below the text** | Under the name and the lines below it |
+| **Above the text** | Over the name |
+
+Chips have no placement, since the buttons are part of the chip. It can be changed for one entity under **Customise per entity → Add override… → Buttons**.
+
+![Button placement in a list and in tiles](images/controls-placement.webp)
+
+**Order of the buttons** decides which button comes first. At the bottom of the **Buttons** section there is a list of the card's buttons, each with **↑** and **↓**:
+
+- the controls you have chosen (*Light: brightness*, *Cover: open* and so on)
+- **The device's controls (as a group)**, which is the device's own choices, numbers and buttons together
+- your own buttons
+
+![The Order of the buttons list in the editor](images/controls-order-editor.webp)
+
+For one entity, open it under **Customise per entity**. Its **Order of the buttons** lists the buttons that entity really has, and here the device's own controls are listed one by one, so you can move a single one. An order set on an entity replaces the card's order for that entity, and **Use the card's order** removes it again.
+
+- The list is only shown when there are at least two buttons to order
+- Buttons you have not moved come after the others, in their normal order. If a device later gets a new control, it ends up last, and nothing else changes
+- With no order set, the buttons come in their normal order
+- **Button placement** moves the row, and **Order of the buttons** orders what is in it. They work together
+
+In YAML the order is a list of names:
+
+| Name | Which button |
+|---|---|
+| `brightness`, `fan_speed` and so on | A control from the table above, by its key |
+| `devices` | All of the device's own controls, as a group (on the card) |
+| `dev:select.fan_swing` | One of the device's own controls, by its entity (on an entity) |
+| `btn:0`, `btn:1` | Your own buttons, counted from 0 |
+
+```yaml
+type: custom:curio-card
+buttons_position: below
+buttons_order:
+  - btn:0
+  - brightness
+  - devices
+entities:
+  - light.living_room
+  - entity: fan.bedroom
+    buttons_order:
+      - dev:select.fan_horizontal_swing
+      - fan_speed
+```
+
 ## Hide all buttons on one entity
 
 Under **Customise per entity → Add override…** you find **Hide all buttons**. It removes the controls, the device's own choices, numbers and buttons, your own buttons and the on/off switch from that entity. The rest of the card is not changed.
@@ -156,6 +212,7 @@ controls:
   - brightness
   - kelvin
 button_size: m
+buttons_position: right
 controls_autoclose: 8
 buttons:
   - icon: mdi:power
