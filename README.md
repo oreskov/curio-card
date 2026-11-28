@@ -93,7 +93,7 @@ You can leave the YAML alone from here: everything below is set in the editor. M
 | [Status indicators](https://github.com/oreskov/curio-card/blob/main/docs/status-indicators.md) | Dot, badge, ring, stripe, bubble and state text |
 | [Actions](https://github.com/oreskov/curio-card/blob/main/docs/actions.md) | Tap, hold and double tap, and what Toggle does |
 | [Settings reference](https://github.com/oreskov/curio-card/blob/main/docs/settings-reference.md) | Every setting with its YAML key and default |
-| [Recipes](https://github.com/oreskov/curio-card/blob/main/docs/recipes.md) | Twenty-four ready-made cards with the steps to build them in the editor |
+| [Recipes](https://github.com/oreskov/curio-card/blob/main/docs/recipes.md) | Twenty-five ready-made cards with the steps to build them in the editor |
 | [Troubleshooting](https://github.com/oreskov/curio-card/blob/main/docs/troubleshooting.md) | What to check when something does not look right |
 
 ## Known limitations

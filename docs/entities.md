@@ -97,11 +97,15 @@ entities:
     buttons: []
 ```
 
+### Show only if for this entity
+
+Below the colour rules, **Show only if for this entity** gives the entity a list of its own. When **Use the card's Show only if** is turned off, the entity follows its own list instead of the card's, and an empty list means it is always shown. The rules are the same as in the filter: see [Show only if on one entity](filter.md#show-only-if-on-one-entity).
+
 ### Copy to other entities
 
 At the bottom of an entity's panel, **Copy to other entities** copies what you have set up on this entity to others, so several entities can work the same way without building it again. It only appears when there is more than one entity, and it only offers what this entity has.
 
-1. Tick what to copy: **Overrides**, **Colour rules** and **Buttons**. The number beside each says how many there are
+1. Tick what to copy: **Overrides**, **Colour rules**, **Buttons** and **Show only if**. The number beside each says how many there are
 2. Choose the entities to copy to, or press **Select all others**
 3. Choose what happens to the receiver's own rules and buttons: **Replace the receiver's own** or **Add after the receiver's own**
 4. Press **Copy**. All the chosen entities are changed in one step

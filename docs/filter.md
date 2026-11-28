@@ -18,7 +18,7 @@ The filter has three lists of rules.
 |---|---|
 | **Include** | Finds entities. All entities that match any Include rule are added together |
 | **Exclude** | Removes entities again from what Include found |
-| **Show only if** | Limits everything on the card, both your own entities and the filter result. It never adds entities |
+| **Show only if** | Limits everything on the card, both your own entities and the filter result. It never adds entities. An entity you picked by hand can have a list of its own instead |
 
 The filter is only active when there is at least one complete Include rule. Without one, the editor says: *Add an Include rule to use the filter.* A **Show only if** rule works on its own, and then limits the entities you have picked by hand.
 
@@ -77,6 +77,38 @@ The answer is the same for every entity on the card, so they all show or hide to
 - Several entities are written in YAML as `entity: light.a, light.b`. A condition with `entity` and no `match` means *At least one*
 
 Colour rules and custom groups have the same fields.
+
+### Show only if on one entity
+
+An entity you picked by hand can have its own **Show only if** list. It replaces the card's list for that entity, and the card's list still applies to all the others. Entities the filter finds follow the card's list, since they have nowhere to keep one of their own.
+
+In the editor, open the entity under **Customise per entity**, find **Show only if for this entity** and turn off **Use the card's Show only if**. The list starts empty, which means the entity is always shown. Add rules below it, or use **Copy the card's Show only if here** to start from the card's rules.
+
+The rules work as in the card's list: one matching rule is enough, and every condition in a rule must match. Unfinished rules are ignored, and a condition can look at other entities (see above). **Copy to other entities** copies the list to other entities, and **Copy** and **Paste here** copy a single rule.
+
+A vacuum and its status sensor are both *paused* at the same time. The card hides what says `none` or `ok`, the status should also hide while paused, and the vacuum should always be shown:
+
+```yaml
+type: custom:curio-card
+filter:
+  only_if:
+    - conditions:
+        - field: state
+          operator: not_in
+          value: none, ok
+entities:
+  - entity: vacuum.robot
+    only_if: []
+  - entity: sensor.robot_status
+    only_if:
+      - conditions:
+          - field: state
+            operator: is_not
+            value: paused
+  - sensor.robot_error
+```
+
+`only_if: []` is an empty list, and it means *always shown*. Leaving `only_if` out means the entity follows the card.
 
 ### OR between values in one rule
 
@@ -165,6 +197,7 @@ Two warnings can appear:
 | Media players that are playing or paused | **Include:** *Domain* is `media_player`. **Show only if:** *State* is one of `playing, paused` |
 | Everything with the label *Dashboard* | **Include:** *Label* is `Dashboard` |
 | Your entities, but only while a vacuum is not docked | **Show only if:** *Measure on* the vacuum, *State* is not `docked` |
+| One entity that hides in a state the others still show | **Show only if** on that entity: *State* is not `paused` |
 | A selector that shows only while a player is on | **Show only if:** *Domain* is `input_select` **and** *Measure on* **Pattern** `media_player.*`, *At least one*, *State* is one of `playing, paused, buffering` |
 
 More setups are in [Recipes](recipes.md).

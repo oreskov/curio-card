@@ -136,4 +136,4 @@ These are edited in their own place in the editor, not in the sections above.
 
 A button can carry `icon`, `name`, `color`, `tap_action`, `hold_action`, `double_tap_action` and `entity` (shows the control of a `select`, `input_select`, `number` or `input_number`; then `tap_action` is not used).
 
-An entity written as an object can also carry `name`, `icon`, `color_rules`, `buttons`, `buttons_order`, `hide_buttons` and any setting marked *Per entity* above.
+An entity written as an object can also carry `name`, `icon`, `color_rules`, `only_if`, `buttons`, `buttons_order`, `hide_buttons` and any setting marked *Per entity* above.

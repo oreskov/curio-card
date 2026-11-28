@@ -12,6 +12,7 @@ Several recipes use **Hide the card when empty**. Home Assistant keeps a place o
 - [A room without its lamps](#a-room-without-its-lamps)
 - [Your own entities, but only when the battery is low](#your-own-entities-but-only-when-the-battery-is-low)
 - [Only while the vacuum is cleaning](#only-while-the-vacuum-is-cleaning)
+- [Hide a status, but not the vacuum](#hide-a-status-but-not-the-vacuum)
 - [Media players that are playing](#media-players-that-are-playing)
 - [A selector that only shows while a player is on](#a-selector-that-only-shows-while-a-player-is-on)
 
@@ -240,6 +241,52 @@ filter:
 4. **Advanced → Hide the card when empty:** on.
 
 If the vacuum should always be on the card and only the room should follow it, use two rules. The first has *Domain* **is** `sensor` as well as the *Measure on* condition. The second is *Domain* **is** `vacuum`.
+
+### Hide a status, but not the vacuum
+
+![A vacuum, its room and a dock error under headings. The status and the other error are hidden](images/recipe-own-show-only-if.webp)
+
+The vacuum and its status sensor both say *paused*, and only the status should be hidden. The card hides everything that says `none` or `ok`. The status has a rule of its own, and the vacuum has an empty one, so it is always shown.
+
+```yaml
+type: custom:curio-card
+layout: list
+secondary_info:
+  - state
+filter:
+  only_if:
+    - conditions:
+        - field: state
+          operator: not_in
+          value: none, ok
+entities:
+  - type: section
+    label: Vacuum
+  - entity: vacuum.robot
+    only_if: []
+  - type: section
+    label: Task
+  - entity: sensor.robot_status
+    only_if:
+      - conditions:
+          - field: state
+            operator: is_not
+            value: paused
+  - type: section
+    label: Room
+  - sensor.robot_current_room
+  - type: section
+    label: Errors
+  - sensor.robot_dock_error
+  - sensor.robot_error
+```
+
+**In the editor**
+
+1. **Filter → Add Show only if rule:** *State* **is not one of** `none, ok`.
+2. **Entities:** add the entities, and put a section before each group (**Add section**).
+3. **Entities → Customise per entity**, open the vacuum and find **Show only if for this entity**. Turn off **Use the card's Show only if**. The list stays empty, so the vacuum is always shown.
+4. Open the status, turn off **Use the card's Show only if** and **Add Show only if rule:** *State* **is not** `paused`.
 
 ### Media players that are playing
 

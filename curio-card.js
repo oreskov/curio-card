@@ -1,5 +1,5 @@
 /*!
- * Curio Card til Home Assistant  (v1.1.0)
+ * Curio Card til Home Assistant  (v1.2.0)
  * https://github.com/oreskov/curio-card  -  MIT-licens
  *
  * Et kort til entiteter, der ændrer sig: en liste, der holder sig opdateret af sig selv.
@@ -31,7 +31,7 @@
   /* ====================================================================
    * 1. KONSTANTER OG TEKSTER
    * ================================================================== */
-  const CURIO_VERSION = '1.1.0';
+  const CURIO_VERSION = '1.2.0';
   const PRESS_FEEDBACK_MS = 1500; // hvor længe en enheds-knap lyser efter et tryk
   const CARD_TAG = 'curio-card';
   const EDITOR_TAG = 'curio-card-editor';
@@ -562,7 +562,7 @@
       'ui.filter_intro': 'Find entiteter automatisk med regler. En regel passer, når alle dens betingelser passer (OG). Flere regler i samme liste er ELLER: det er nok, at én passer. Vil du have ELLER mellem værdier i samme regel, så brug "er en af" (fx playing, paused). Medtag-regler finder entiteter og lægger dem sammen, og Udelad-regler fjerner dem bagefter. Resultatet vises efter de manuelt valgte entiteter. Vis kun hvis begrænser til sidst alt på kortet. Tal sammenlignes som tal, * er jokertegn, og ved "er en af" adskilles værdier med komma.',
       'ui.only_if': 'Vis kun hvis',
       'ui.add_only_if': 'Tilføj Vis kun hvis-regel',
-      'ui.only_if_hint': 'Begrænser alle entiteter på kortet, både dine egne og filterets. Tilføjer aldrig nye. Med flere regler er det nok, at én passer. Ufærdige regler ignoreres.',
+      'ui.only_if_hint': 'Begrænser alle entiteter på kortet, både dine egne og filterets. Tilføjer aldrig nye. Med flere regler er det nok, at én passer. Ufærdige regler ignoreres. En egen liste på en af dine entiteter erstatter den for netop den entitet.',
       'ui.only_if_match': 'Vis kun hvis: {n} af {m} entiteter passer lige nu.',
       'ui.buttons_intro': 'Egne knapper er runde ikonknapper ved siden af (grid: under) elementets tekst og kan udføre en vilkårlig handling. Kalder en handling en service uden mål, rammer den elementets egen entitet. Knapper kan også sættes pr. entitet under Entiteter → Tilpas pr. entitet.',
       'ui.add_button': 'Tilføj knap',
@@ -649,6 +649,16 @@
       'ui.item_undo_buttons': 'Fortryd: gendan de {n} slettede knapper',
       'ui.item_use_card_buttons_hint': 'Slå fra for at give entiteten sin egen liste. Den starter tom (ingen knapper), og du kan tilføje egne herunder.',
       'ui.item_copy_card_buttons': 'Kopiér kortets knapper hertil',
+      'ui.item_only_if': 'Vis kun hvis for denne entitet',
+      'ui.item_only_if_hint': 'Har entiteten sin egen liste, bruges den i stedet for kortets «Vis kun hvis». Uden regler vises entiteten altid. Kun for dine egne entiteter; filterets fund følger kortets regler.',
+      'ui.item_use_card_only_if': 'Brug kortets «Vis kun hvis»',
+      'ui.item_use_card_only_if_hint': 'Slå fra for at give entiteten sin egen liste. Den starter tom (entiteten vises altid), og du kan tilføje regler herunder.',
+      'ui.item_undo_only_if': 'Fortryd: gendan de {n} slettede regler',
+      'ui.item_copy_card_only_if': 'Kopiér kortets «Vis kun hvis» hertil',
+      'ui.sum_only_if': 'egen «Vis kun hvis»',
+      'ui.sum_only_if_always': 'vises altid',
+      'label.cp_onlyif': 'Vis kun hvis ({n})',
+      'label.cp_onlyif_zero': 'Vises altid (springer kortets «Vis kun hvis» over)',
       'label.hide_buttons': 'Skjul alle knapper',
       'help.hide_buttons': 'Skjuler styringer (fx afspil, næste, lysstyrke), enhedens egne valg, tal og knapper, egne knapper og kontakten på netop denne entitet. Andre entiteter beholder deres.',
       'ui.item_duplicate': 'Tilføj entiteten igen',
@@ -1177,7 +1187,7 @@
       'ui.filter_intro': 'Find entities automatically with rules. A rule matches when all its conditions match (AND). Several rules in the same list are OR: one matching is enough. To get OR between values within one rule, use "is one of" (for example playing, paused). Include rules find entities and add them together, and Exclude rules remove them afterwards. The result is shown after the manually chosen entities. Show only if limits everything on the card at the end. Numbers are compared as numbers, * is a wildcard, and for "is one of" the values are separated by commas.',
       'ui.only_if': 'Show only if',
       'ui.add_only_if': 'Add Show only if rule',
-      'ui.only_if_hint': 'Limits all entities on the card, both your own and the filter result. Never adds new ones. With several rules, one matching is enough. Unfinished rules are ignored.',
+      'ui.only_if_hint': 'Limits all entities on the card, both your own and the filter result. Never adds new ones. With several rules, one matching is enough. Unfinished rules are ignored. A list of its own on one of your entities replaces this for that entity.',
       'ui.only_if_match': 'Show only if: {n} of {m} entities match right now.',
       'ui.buttons_intro': 'Custom buttons are round icon buttons next to (grid: below) the item\'s text and can run any action. If an action calls a service without a target, it hits the item\'s own entity. Buttons can also be set per entity under Entities → Customise per entity.',
       'ui.add_button': 'Add button',
@@ -1264,6 +1274,16 @@
       'ui.item_undo_buttons': 'Undo: restore the {n} deleted buttons',
       'ui.item_use_card_buttons_hint': 'Turn off to give this entity its own list. It starts empty (no buttons), and you can add your own below.',
       'ui.item_copy_card_buttons': 'Copy the card\'s buttons here',
+      'ui.item_only_if': 'Show only if for this entity',
+      'ui.item_only_if_hint': 'If the entity has its own list, it is used instead of the card\'s Show only if. With no rules the entity is always shown. Only for your own entities; entities found by the filter follow the card\'s rules.',
+      'ui.item_use_card_only_if': 'Use the card\'s Show only if',
+      'ui.item_use_card_only_if_hint': 'Turn off to give this entity its own list. It starts empty (the entity is always shown), and you can add rules below.',
+      'ui.item_undo_only_if': 'Undo: restore the {n} deleted rules',
+      'ui.item_copy_card_only_if': 'Copy the card\'s Show only if here',
+      'ui.sum_only_if': 'own Show only if',
+      'ui.sum_only_if_always': 'always shown',
+      'label.cp_onlyif': 'Show only if ({n})',
+      'label.cp_onlyif_zero': 'Always shown (skips the card\'s Show only if)',
       'label.hide_buttons': 'Hide all buttons',
       'help.hide_buttons': 'Hides controls (for example play, next, brightness), the device\'s own choices, numbers and buttons, own buttons and the switch on this entity only. Other entities keep theirs.',
       'ui.item_duplicate': 'Add the entity again',
@@ -1922,11 +1942,20 @@
     };
   }
 
-  // "Vis kun hvis": begrænser alle entiteter på kortet. Ufærdige regler ignoreres.
-  function createRequireTest(filter) {
-    const rules = cleanRules(filter && filter.only_if).filter((conds) => conds.every(condComplete));
+  // "Vis kun hvis": en liste af regler (ELLER mellem regler, OG mellem betingelser). Ufærdige regler ignoreres;
+  // uden færdige regler er der ingen begrænsning (null).
+  function createRequireFromRules(list) {
+    const rules = cleanRules(list).filter((conds) => conds.every(condComplete));
     if (!rules.length) return null;
     return (id, so, hass) => { const ctx = { id, so, hass }; return rules.some((conds) => conds.every((c) => condMatches(c, ctx))); };
+  }
+  // Kortets regler begrænser alle entiteter på kortet, medmindre en manuel entitet har sin egen liste.
+  function createRequireTest(filter) { return createRequireFromRules(filter && filter.only_if); }
+  // En manuel entitets egen liste huskes pr. liste, så den ikke bygges igen ved hver opdatering.
+  const _reqCache = new WeakMap();
+  function createRequireCached(list) {
+    if (!_reqCache.has(list)) _reqCache.set(list, createRequireFromRules(list));
+    return _reqCache.get(list);
   }
 
   function buildItems(cfg, hass, eff, extraIds) {
@@ -1976,7 +2005,9 @@
       const missing = !stateObj;
       const active = isActive(domain, state);
       if (eff.only_active && !active) continue;
-      if (req && stateObj && !req(id, stateObj, hass)) continue;
+      // En egen «only_if»-liste på den manuelle entitet erstatter kortets (en tom liste = altid vist).
+      const test = Array.isArray(obj.only_if) ? createRequireCached(obj.only_if) : req;
+      if (test && stateObj && !test(id, stateObj, hass)) continue;
       if (eff.hide_unavailable && unavailable) continue;
       if (eff.max_items > 0 && entityCount >= eff.max_items) continue;
       if (limit > 0 && !have.has(id) && extra.has(id)) { if (fCount >= limit) { dropped++; continue; } fCount++; }
@@ -3347,7 +3378,7 @@
       this._colorRefs = [...refs];
       ruleRefs(config.group_rules, refs);
       if (config.filter && typeof config.filter === 'object') { ruleRefs(config.filter.include, refs); ruleRefs(config.filter.exclude, refs); ruleRefs(config.filter.only_if, refs); }
-      if (Array.isArray(config.entities)) for (const r of config.entities) if (r && typeof r === 'object') ruleRefs(r.color_rules, refs);
+      if (Array.isArray(config.entities)) for (const r of config.entities) if (r && typeof r === 'object') { ruleRefs(r.color_rules, refs); ruleRefs(r.only_if, refs); }
       this._refs = [...refs];
       this._patterns = this._refs.filter(hasWild);
       this._patKey = '';
@@ -4244,7 +4275,9 @@
       let lastKey = null;
       const mkBtn = (text, fn, cls) => { const b = el('button', cls || '', text); b.type = 'button'; b.addEventListener('click', fn); return b; };
       const G = o.kind === 'group';
-      const newCond = () => (G ? { field: 'domain', operator: 'is', value: '' } : { field: 'state', operator: 'lt', value: '' });
+      // 'filter': kun betingelser, uden farve, navn eller animation (bruges til «Vis kun hvis» pr. entitet).
+      const F = o.kind === 'filter';
+      const newCond = () => (G ? { field: 'domain', operator: 'is', value: '' } : F ? { field: 'state', operator: 'is', value: '' } : { field: 'state', operator: 'lt', value: '' });
       const commit = (list, structural) => {
         lastKey = JSON.stringify(list);
         o.set(list);
@@ -4262,8 +4295,8 @@
           const head = el('div', 'rhead');
           const rm = mkBtn('✕', () => { this._rowDrop(o.prefix, ri); commit(o.get().filter((_, i) => i !== ri), true); }, 'rm');
           rm.title = tr('ui.remove_rule');
-          const title = el('span', '', G && rule.name ? rule.name : tr(G ? 'ui.group_rule_n' : 'ui.color_rule_n', { n: ri + 1 }));
-          const clipB = () => this._clipBtn(G ? 'group' : 'color', () => o.get()[ri], () => (G && rule.name ? rule.name : this._condText(rule)));
+          const title = el('span', '', G && rule.name ? rule.name : tr(G ? 'ui.group_rule_n' : F ? 'ui.rule_n' : 'ui.color_rule_n', { n: ri + 1 }));
+          const clipB = () => this._clipBtn(G ? 'group' : F ? 'filter' : 'color', () => o.get()[ri], () => (G && rule.name ? rule.name : this._condText(rule)));
           const dupBtn = () => {
             const b = mkBtn('⧉', () => {
               const cur = o.get();
@@ -4337,6 +4370,7 @@
             const cur = o.get();
             commit(cur.map((r, i) => (i === ri ? { ...r, conditions: [...(r.conditions || []), newCond()] } : r)), true);
           }, 'add'));
+          if (!F) {
           const rf = document.createElement('ha-form');
           rf.computeLabel = (sch) => tr('label.r_' + sch.name);
           rf.hass = this._hass;
@@ -4380,11 +4414,12 @@
           });
           this._forms.set(o.prefix + ':' + ri + ':r', rf);
           rb.appendChild(rf);
+          }
           this._foldRow(rb, head, o.prefix + ':' + ri, { color: rule.color, text: [this._condText(rule), !G && rule.animation ? tr('o.animation.' + rule.animation) : ''].filter(Boolean).join(' · ') });
           host.appendChild(rb);
         });
-        host.appendChild(mkBtn('+ ' + tr(G ? 'ui.add_group_rule' : 'ui.add_color_rule'), () => { this._rowOpen.add(o.prefix + ':' + o.get().length); commit([...o.get(), G ? { conditions: [newCond()] } : { conditions: [newCond()], color: 'red' }], true); }, 'add'));
-        host.appendChild(this._clipBar(G ? 'group' : 'color', (item) => { this._rowOpen.add(o.prefix + ':' + o.get().length); commit([...o.get(), item], true); }));
+        host.appendChild(mkBtn('+ ' + tr(G ? 'ui.add_group_rule' : F ? 'ui.add_only_if' : 'ui.add_color_rule'), () => { this._rowOpen.add(o.prefix + ':' + o.get().length); commit([...o.get(), G || F ? { conditions: [newCond()] } : { conditions: [newCond()], color: 'red' }], true); }, 'add'));
+        host.appendChild(this._clipBar(G ? 'group' : F ? 'filter' : 'color', (item) => { this._rowOpen.add(o.prefix + ':' + o.get().length); commit([...o.get(), item], true); }));
         this._foldBar(host);
       };
       render();
@@ -4969,6 +5004,77 @@
         body.appendChild(cpc);
         this._ovrSum.set(uid + '|cc', updCpc);
         updCpc();
+        // «Vis kun hvis» pr. entitet: kortets regler gælder, medmindre entiteten har sin egen liste (også en tom: altid vist).
+        body.appendChild(el('h4', '', tr('ui.item_only_if')));
+        body.appendChild(el('div', 'note', tr('ui.item_only_if_hint')));
+        const rtop = el('div', 'ibtop');
+        body.appendChild(rtop);
+        const rbox2 = el('div', 'frules ifbox');
+        body.appendChild(rbox2);
+        const hasOwnReq = () => Array.isArray(this._entityObj(uid).only_if);
+        const reqEd = this._ruleEditor(rbox2, {
+          kind: 'filter',
+          prefix: 'ovrif:' + uid,
+          get: () => { const l = this._entityObj(uid).only_if; return Array.isArray(l) ? l : []; },
+          // Listen bliver stående, også når den er tom: så vender kortets regler ikke tilbage ved et uheld.
+          // Skriver brugeren nye regler, er de gemte regler til Fortryd forældede.
+          set: (l) => {
+            this._patchEntity(uid, (o) => { o.only_if = l; });
+            if (l.length && this._reqUndo && this._reqUndo.delete(uid)) renderReqTop();
+          }
+        });
+        const renderReqTop = () => {
+          this._forms.delete('iif:' + uid);
+          rtop.replaceChildren();
+          rbox2.style.display = hasOwnReq() ? '' : 'none';
+          const f = document.createElement('ha-form');
+          f.computeLabel = () => tr('ui.item_use_card_only_if');
+          f.computeHelper = () => tr('ui.item_use_card_only_if_hint');
+          f.hass = this._hass;
+          f.schema = [{ name: 'use', selector: { boolean: {} } }];
+          f.data = { use: !hasOwnReq() };
+          f.addEventListener('value-changed', (e) => {
+            e.stopPropagation();
+            const use = !!(e.detail.value || {}).use;
+            f.data = { use };
+            const had = Array.isArray(this._entityObj(uid).only_if) ? this._entityObj(uid).only_if : [];
+            if (!this._reqUndo) this._reqUndo = new Map();
+            // De gemte regler bliver stående, selv om kontakten slås fra igen (en tom liste har intet at gemme).
+            if (use && had.length) this._reqUndo.set(uid, JSON.parse(JSON.stringify(had)));
+            this._patchEntity(uid, (o) => { if (use) delete o.only_if; else o.only_if = []; });
+            renderReqTop();
+            reqEd.refresh();
+          });
+          this._forms.set('iif:' + uid, f);
+          rtop.appendChild(f);
+          const saved = this._reqUndo && this._reqUndo.get(uid);
+          const ownList = this._entityObj(uid).only_if;
+          if (saved && saved.length && (!Array.isArray(ownList) || !ownList.length)) {
+            const un = el('button', 'add undo', tr('ui.item_undo_only_if', { n: saved.length }));
+            un.type = 'button';
+            un.addEventListener('click', () => {
+              this._reqUndo.delete(uid);
+              this._patchEntity(uid, (o) => { o.only_if = saved; });
+              renderReqTop();
+              reqEd.refresh();
+            });
+            rtop.appendChild(un);
+          }
+          const cardIf = this._config.filter && Array.isArray(this._config.filter.only_if) ? this._config.filter.only_if : [];
+          if (hasOwnReq() && cardIf.length) {
+            const cp = el('button', 'add', '+ ' + tr('ui.item_copy_card_only_if'));
+            cp.type = 'button';
+            cp.addEventListener('click', () => {
+              const copy = JSON.parse(JSON.stringify(cardIf));
+              this._patchEntity(uid, (o) => { o.only_if = [...(Array.isArray(o.only_if) ? o.only_if : []), ...copy]; });
+              if (this._reqUndo) this._reqUndo.delete(uid);
+              renderReqTop();
+              reqEd.refresh();
+            });
+            rtop.appendChild(cp);
+          }
+        };
+        renderReqTop();
         if (this._config.layout !== 'chips') {
           body.appendChild(el('h4', '', tr('ui.item_buttons')));
           body.appendChild(el('div', 'note', tr('ui.item_buttons_hint')));
@@ -4993,7 +5099,8 @@
               form.data = { use };
               const had = Array.isArray(this._entityObj(uid).buttons) ? this._entityObj(uid).buttons : [];
               if (!this._btnUndo) this._btnUndo = new Map();
-              if (use && had.length) this._btnUndo.set(uid, JSON.parse(JSON.stringify(had))); else this._btnUndo.delete(uid);
+              // De gemte knapper bliver stående, selv om kontakten slås fra igen (en tom liste har intet at gemme).
+              if (use && had.length) this._btnUndo.set(uid, JSON.parse(JSON.stringify(had)));
               this._patchEntity(uid, (o) => { if (use) delete o.buttons; else o.buttons = []; });
               renderTop();
               bl.render();
@@ -5001,7 +5108,8 @@
             this._forms.set('ibu:' + uid, form);
             top.appendChild(form);
             const saved = this._btnUndo && this._btnUndo.get(uid);
-            if (!hasOwn() && saved && saved.length) {
+            const ownBtns = this._entityObj(uid).buttons;
+            if (saved && saved.length && (!Array.isArray(ownBtns) || !ownBtns.length)) {
               const un = el('button', 'add undo', tr('ui.item_undo_buttons', { n: saved.length }));
               un.type = 'button';
               un.addEventListener('click', () => {
@@ -5018,6 +5126,8 @@
               cp.addEventListener('click', () => {
                 const copy = JSON.parse(JSON.stringify(this._buttonsCfg()));
                 this._patchEntity(uid, (o) => { o.buttons = [...(Array.isArray(o.buttons) ? o.buttons : []), ...copy]; });
+                if (this._btnUndo) this._btnUndo.delete(uid);
+                renderTop();
                 bl.render();
               });
               top.appendChild(cp);
@@ -5029,6 +5139,8 @@
             set: (list, structural) => {
               // Listen bliver stående, også når den er tom: så vender kortets knapper ikke tilbage ved et uheld.
               this._patchEntity(uid, (o) => { o.buttons = list; });
+              // Nye knapper gør de gemte knapper til Fortryd forældede.
+              if (list.length && this._btnUndo) this._btnUndo.delete(uid);
               if (structural) { bl.render(); renderTop(); }
             }
           });
@@ -5063,7 +5175,7 @@
     _copySection(body, uid) {
       const wrap = el('div', 'cpsec');
       body.appendChild(wrap);
-      const st = { ovr: true, rules: true, btns: true, to: [], mode: 'replace' };
+      const st = { ovr: true, rules: true, btns: true, onlyif: true, to: [], mode: 'replace' };
       let lastKey = null;
       const render = () => {
         const o = this._entityObj(uid);
@@ -5072,7 +5184,9 @@
         const nRules = Array.isArray(o.color_rules) ? o.color_rules.length : 0;
         const hasBtns = this._config.layout !== 'chips' && Array.isArray(o.buttons);
         const nBtns = hasBtns ? o.buttons.length : 0;
-        const key = JSON.stringify([nOvr, nRules, hasBtns ? nBtns : -1, others.map((r) => r.uid)]);
+        const hasReq = Array.isArray(o.only_if);
+        const nReq = hasReq ? o.only_if.length : 0;
+        const key = JSON.stringify([nOvr, nRules, hasBtns ? nBtns : -1, hasReq ? nReq : -1, others.map((r) => r.uid)]);
         if (key === lastKey) return;
         lastKey = key;
         this._forms.delete('cp:' + uid);
@@ -5080,7 +5194,7 @@
         wrap.style.display = others.length ? '' : 'none';
         if (!others.length) return;
         wrap.appendChild(el('h4', '', tr('ui.copy_title')));
-        if (!nOvr && !nRules && !hasBtns) { wrap.appendChild(el('div', 'note', tr('ui.cp_none'))); return; }
+        if (!nOvr && !nRules && !hasBtns && !hasReq) { wrap.appendChild(el('div', 'note', tr('ui.cp_none'))); return; }
         wrap.appendChild(el('div', 'note', tr('ui.copy_hint')));
         st.to = st.to.filter((u) => others.some((r) => r.uid === u));
         const hass = this._hass;
@@ -5095,10 +5209,11 @@
         if (nOvr) { schema.push({ name: 'ovr', selector: { boolean: {} } }); labels.ovr = tr('label.cp_ovr', { n: nOvr }); data.ovr = st.ovr; }
         if (nRules) { schema.push({ name: 'rules', selector: { boolean: {} } }); labels.rules = tr('label.cp_rules', { n: nRules }); data.rules = st.rules; }
         if (hasBtns) { schema.push({ name: 'btns', selector: { boolean: {} } }); labels.btns = nBtns ? tr('label.cp_btns', { n: nBtns }) : tr('label.cp_btns_zero'); data.btns = st.btns; }
+        if (hasReq) { schema.push({ name: 'onlyif', selector: { boolean: {} } }); labels.onlyif = nReq ? tr('label.cp_onlyif', { n: nReq }) : tr('label.cp_onlyif_zero'); data.onlyif = st.onlyif; }
         schema.push({ name: 'to', selector: { select: { multiple: true, mode: 'list', options: others.map((r) => ({ value: r.uid, label: nameOf(r) })) } } });
         labels.to = tr('label.cp_to');
         data.to = st.to;
-        if (nRules || hasBtns) {
+        if (nRules || hasBtns || hasReq) {
           schema.push({ name: 'mode', selector: { select: { mode: 'dropdown', options: ['replace', 'add'].map((v) => ({ value: v, label: tr('o.cp_mode.' + v) })) } } });
           labels.mode = tr('label.cp_mode');
           data.mode = st.mode;
@@ -5108,15 +5223,15 @@
         form.schema = schema;
         form.hass = this._hass;
         form.data = data;
-        const use = () => ({ ovr: !!nOvr && st.ovr, rules: !!nRules && st.rules, btns: hasBtns && st.btns });
+        const use = () => ({ ovr: !!nOvr && st.ovr, rules: !!nRules && st.rules, btns: hasBtns && st.btns, onlyif: hasReq && st.onlyif });
         const go = el('button', 'go', tr('ui.cp_go'));
         go.type = 'button';
-        const upd = () => { const u = use(); go.disabled = !(st.to.length && (u.ovr || u.rules || u.btns)); };
+        const upd = () => { const u = use(); go.disabled = !(st.to.length && (u.ovr || u.rules || u.btns || u.onlyif)); };
         form.addEventListener('value-changed', (e) => {
           e.stopPropagation();
           const v = e.detail.value || {};
           form.data = v;
-          for (const k of ['ovr', 'rules', 'btns']) if (k in v) st[k] = !!v[k];
+          for (const k of ['ovr', 'rules', 'btns', 'onlyif']) if (k in v) st[k] = !!v[k];
           st.to = Array.isArray(v.to) ? v.to : [];
           if (v.mode) st.mode = v.mode;
           upd();
@@ -5162,6 +5277,10 @@
           if (mode !== 'add') obj.buttons = clone(src.buttons);
           else if (src.buttons.length) obj.buttons = [...(Array.isArray(obj.buttons) ? obj.buttons : []), ...clone(src.buttons)];
         }
+        if (what.onlyif && Array.isArray(src.only_if)) {
+          if (mode !== 'add') obj.only_if = clone(src.only_if);
+          else if (src.only_if.length) obj.only_if = [...(Array.isArray(obj.only_if) ? obj.only_if : []), ...clone(src.only_if)];
+        }
         return Object.keys(obj).length === 1 && obj.entity ? obj.entity : obj;
       });
       this._ovrKey = null; // modtagernes paneler skal bygges om
@@ -5178,6 +5297,7 @@
       if (o.name || o.icon) out.push(tr('ui.sum_look'));
       const r = Array.isArray(o.color_rules) ? o.color_rules.length : 0;
       if (r) out.push(r === 1 ? tr('ui.sum_rules_1') : tr('ui.sum_rules_n', { n: r }));
+      if (Array.isArray(o.only_if)) out.push(o.only_if.length === 0 ? tr('ui.sum_only_if_always') : tr('ui.sum_only_if'));
       if (Array.isArray(o.buttons)) out.push(o.buttons.length === 0 ? tr('ui.sum_btn_zero') : o.buttons.length === 1 ? tr('ui.sum_btn_1') : tr('ui.sum_btn_n', { n: o.buttons.length }));
       return out.length ? out.join(' · ') : tr('ui.sum_none');
     }
